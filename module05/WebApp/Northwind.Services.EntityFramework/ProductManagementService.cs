@@ -59,7 +59,7 @@ namespace Northwind.Services.Products
         /// <inheritdoc/>
         public async IAsyncEnumerable<Product> GetProductsAsync(int offset, int limit)
         {
-            await foreach (var product in this.context.Products.OrderBy(product => product.ProductId).Skip(offset).Take(limit).AsAsyncEnumerable())
+            await foreach (var product in this.context.Products.Include(a => a.Category).OrderBy(product => product.ProductId).Skip(offset).Take(limit).AsAsyncEnumerable())
             {
                 yield return this.mapper.Map<Product>(product);
             }
@@ -68,7 +68,7 @@ namespace Northwind.Services.Products
         /// <inheritdoc/>
         public async IAsyncEnumerable<Product> GetProductsForCategoryAsync(int categoryId)
         {
-            await foreach(var product in this.context.Products.Where(prod => prod.CategoryId == categoryId).OrderBy(product => product.ProductId).AsAsyncEnumerable())
+            await foreach(var product in this.context.Products.Include(a => a.Category).Where(prod => prod.CategoryId == categoryId).OrderBy(product => product.ProductId).AsAsyncEnumerable())
             {
                 yield return this.mapper.Map<Product>(product);
             }
@@ -77,7 +77,7 @@ namespace Northwind.Services.Products
         /// <inheritdoc/>
         public async IAsyncEnumerable<Product> LookupProductsByNameAsync(IList<string> names)
         {
-            await foreach (var product in this.context.Products.Where(prod => names.Contains(prod.ProductName)).OrderBy(prod => prod.ProductId).AsAsyncEnumerable())
+            await foreach (var product in this.context.Products.Include(a => a.Category).Where(prod => names.Contains(prod.ProductName)).OrderBy(prod => prod.ProductId).AsAsyncEnumerable())
             {
                 yield return this.mapper.Map<Product>(product);
             }

@@ -1,4 +1,6 @@
 D:\Epam\northwind-ap\module05\WebApp\Northwind.Services.EntityFrameworkCore.Blogging\bin\Debug\net5.0\Northwind.Services.EntityFrameworkCore.Blogging.deps.json
+D:\Epam\northwind-ap\module05\WebApp\Northwind.Services.EntityFrameworkCore.Blogging\bin\Debug\net5.0\Northwind.Services.EntityFrameworkCore.Blogging.runtimeconfig.json
+D:\Epam\northwind-ap\module05\WebApp\Northwind.Services.EntityFrameworkCore.Blogging\bin\Debug\net5.0\Northwind.Services.EntityFrameworkCore.Blogging.runtimeconfig.dev.json
 D:\Epam\northwind-ap\module05\WebApp\Northwind.Services.EntityFrameworkCore.Blogging\bin\Debug\net5.0\Northwind.Services.EntityFrameworkCore.Blogging.dll
 D:\Epam\northwind-ap\module05\WebApp\Northwind.Services.EntityFrameworkCore.Blogging\bin\Debug\net5.0\ref\Northwind.Services.EntityFrameworkCore.Blogging.dll
 D:\Epam\northwind-ap\module05\WebApp\Northwind.Services.EntityFrameworkCore.Blogging\bin\Debug\net5.0\Northwind.Services.EntityFrameworkCore.Blogging.pdb
@@ -15,6 +17,4 @@ D:\Epam\northwind-ap\module05\WebApp\Northwind.Services.EntityFrameworkCore.Blog
 D:\Epam\northwind-ap\module05\WebApp\Northwind.Services.EntityFrameworkCore.Blogging\obj\Debug\net5.0\Northwind.Services.EntityFrameworkCore.Blogging.dll
 D:\Epam\northwind-ap\module05\WebApp\Northwind.Services.EntityFrameworkCore.Blogging\obj\Debug\net5.0\ref\Northwind.Services.EntityFrameworkCore.Blogging.dll
 D:\Epam\northwind-ap\module05\WebApp\Northwind.Services.EntityFrameworkCore.Blogging\obj\Debug\net5.0\Northwind.Services.EntityFrameworkCore.Blogging.pdb
-D:\Epam\northwind-ap\module05\WebApp\Northwind.Services.EntityFrameworkCore.Blogging\bin\Debug\net5.0\Northwind.Services.EntityFrameworkCore.Blogging.runtimeconfig.json
-D:\Epam\northwind-ap\module05\WebApp\Northwind.Services.EntityFrameworkCore.Blogging\bin\Debug\net5.0\Northwind.Services.EntityFrameworkCore.Blogging.runtimeconfig.dev.json
 D:\Epam\northwind-ap\module05\WebApp\Northwind.Services.EntityFrameworkCore.Blogging\obj\Debug\net5.0\Northwind.Services.EntityFrameworkCore.Blogging.genruntimeconfig.cache

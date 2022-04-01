@@ -21,6 +21,8 @@ namespace NorthwindWebApp
             this.CreateMap<Employee, EmployeeViewModel>();
             this.CreateMap<EmployeeEntity, EmployeeTransferObject>();
             this.CreateMap<EmployeeTransferObject, EmployeeEntity>();
+
+           // this.CreateMap<Product, ProductViewModel>();
             this.CreateMap<Product, ProductTransferObject>();
             this.CreateMap<ProductTransferObject, Product>();
             this.CreateMap<ProductCategory, ProductCategoryTransferObject>();

@@ -27,20 +27,32 @@ namespace WebApp6.Controllers
         {
             RegistrationViewModel registrationViewModel = new RegistrationViewModel
             {
-                Roles = new SelectList(this.context.Roles),
+                Roles = GetSelectListItems(this.context.Roles),
             };
+           
 
-            var viewModel = new RegistrationViewModel
-            {
-                Roles = this.context.Roles.Select(a => new SelectListItem
-                {
-                    Text = a.Name,
-                    Value = a.Id.ToString()
-                })
-            };
             return View(registrationViewModel);
         }
+        private IEnumerable<SelectListItem> GetSelectListItems(IEnumerable<Role> elements)
+        {
+            // Create an empty list to hold result of the operation
+            var selectList = new List<SelectListItem>();
 
+            // For each string in the 'elements' variable, create a new SelectListItem object
+            // that has both its Value and Text properties set to a particular value.
+            // This will result in MVC rendering each item as:
+            //     <option value="State Name">State Name</option>
+            foreach (var element in elements)
+            {
+                selectList.Add(new SelectListItem
+                {
+                    Value = element.Id.ToString(),
+                    Text = element.Name
+                });
+            }
+
+            return selectList;
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegistrationViewModel model)
@@ -58,7 +70,7 @@ namespace WebApp6.Controllers
                         Password = BCrypt.Net.BCrypt.HashPassword(model.Password),
                     };
 
-                    Role userRole = await context.Roles.FirstOrDefaultAsync(r => r.Id == model.SelectedRoleId);
+                    Role userRole = await context.Roles.FirstOrDefaultAsync(r => r.Id.ToString() == model.Role);
 
                     if (userRole != null)
                     {

@@ -21,12 +21,15 @@ namespace WebApp6
             this.CreateMap<Employee, EmployeeViewModel>();
             this.CreateMap<EmployeeEntity, EmployeeTransferObject>();
             this.CreateMap<EmployeeTransferObject, EmployeeEntity>();
+
+            this.CreateMap<Product, ProductViewModel>();
             this.CreateMap<Product, ProductTransferObject>();
             this.CreateMap<ProductTransferObject, Product>();
             this.CreateMap<ProductCategory, ProductCategoryTransferObject>();
             this.CreateMap<ProductCategoryTransferObject, ProductCategory>();
             this.CreateMap<Product, ProductEntity>();
-            this.CreateMap<ProductEntity, Product>();
+            this.CreateMap<ProductEntity, Product>().ForMember(x => x.CategoryName,
+          x => x.MapFrom(m => m.Category.CategoryName));
             this.CreateMap<ProductCategory, CategoryEntity>();
             this.CreateMap<CategoryEntity, ProductCategory>();
             this.CreateMap<EmployeeEntity, Employee>();

@@ -42,7 +42,7 @@ namespace Northwind.Services.EntityFrameworkCore.Blogging
             var (result, article) = await this.TryGetArticleAsync(id).ConfigureAwait(false);
             if (result)
             {
-                this.context.Articles.Remove(this.mapper.Map<Northwind.Services.EntityFrameworkCore.Blogging.Entities.BlogArticleEntity>(article));
+                this.context.Articles.Remove(this.mapper.Map<BlogArticleEntity>(article));
                 this.context.SaveChanges();
             }
 

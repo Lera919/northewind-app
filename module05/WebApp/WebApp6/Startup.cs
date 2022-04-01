@@ -87,7 +87,7 @@ namespace WebApp6
             {
                 endpoints.MapControllerRoute(
                      name: "default",
-                     pattern: "{controller=Employee}/{action=GetAll}/{id?}");
+                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

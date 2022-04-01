@@ -1,5 +1,8 @@
 D:\Epam\northwind-ap\module05\WebApp\Northwind.Authentication\bin\Debug\net5.0\Northwind.Authentication.deps.json
+D:\Epam\northwind-ap\module05\WebApp\Northwind.Authentication\bin\Debug\net5.0\Northwind.Authentication.runtimeconfig.json
+D:\Epam\northwind-ap\module05\WebApp\Northwind.Authentication\bin\Debug\net5.0\Northwind.Authentication.runtimeconfig.dev.json
 D:\Epam\northwind-ap\module05\WebApp\Northwind.Authentication\bin\Debug\net5.0\Northwind.Authentication.dll
+D:\Epam\northwind-ap\module05\WebApp\Northwind.Authentication\bin\Debug\net5.0\ref\Northwind.Authentication.dll
 D:\Epam\northwind-ap\module05\WebApp\Northwind.Authentication\bin\Debug\net5.0\Northwind.Authentication.pdb
 D:\Epam\northwind-ap\module05\WebApp\Northwind.Authentication\obj\Debug\net5.0\Northwind.Authentication.csproj.AssemblyReference.cache
 D:\Epam\northwind-ap\module05\WebApp\Northwind.Authentication\obj\Debug\net5.0\Northwind.Authentication.GeneratedMSBuildEditorConfig.editorconfig
@@ -9,7 +12,4 @@ D:\Epam\northwind-ap\module05\WebApp\Northwind.Authentication\obj\Debug\net5.0\N
 D:\Epam\northwind-ap\module05\WebApp\Northwind.Authentication\obj\Debug\net5.0\Northwind.Authentication.dll
 D:\Epam\northwind-ap\module05\WebApp\Northwind.Authentication\obj\Debug\net5.0\ref\Northwind.Authentication.dll
 D:\Epam\northwind-ap\module05\WebApp\Northwind.Authentication\obj\Debug\net5.0\Northwind.Authentication.pdb
-D:\Epam\northwind-ap\module05\WebApp\Northwind.Authentication\bin\Debug\net5.0\Northwind.Authentication.runtimeconfig.json
-D:\Epam\northwind-ap\module05\WebApp\Northwind.Authentication\bin\Debug\net5.0\Northwind.Authentication.runtimeconfig.dev.json
-D:\Epam\northwind-ap\module05\WebApp\Northwind.Authentication\obj\Debug\net5.0\refint\Northwind.Authentication.dll
 D:\Epam\northwind-ap\module05\WebApp\Northwind.Authentication\obj\Debug\net5.0\Northwind.Authentication.genruntimeconfig.cache

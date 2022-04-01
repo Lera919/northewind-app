@@ -176,3 +176,6 @@ D:\Epam\northwind-ap\module05\WebApp\WebApp6\bin\Debug\net5.0\Northwind.Authenti
 D:\Epam\northwind-ap\module05\WebApp\WebApp6\bin\Debug\net5.0\Northwind.Authentication.pdb
 D:\Epam\northwind-ap\module05\WebApp\WebApp6\obj\Debug\net5.0\Razor\Views\Account\Register.cshtml.g.cs
 D:\Epam\northwind-ap\module05\WebApp\WebApp6\obj\Debug\net5.0\Razor\Views\Account\Login.cshtml.g.cs
+D:\Epam\northwind-ap\module05\WebApp\WebApp6\obj\Debug\net5.0\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
+D:\Epam\northwind-ap\module05\WebApp\WebApp6\obj\Debug\net5.0\Razor\Views\Product\GetAll.cshtml.g.cs
+D:\Epam\northwind-ap\module05\WebApp\WebApp6\obj\Debug\net5.0\Razor\Views\Shared\_ProductActionPartial.cshtml.g.cs
