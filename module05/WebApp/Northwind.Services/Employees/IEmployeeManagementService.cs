@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using NorthwindWebApp.Entities;
+using WebAppModule6.Entities;
 
 namespace Northwind.Services.Employees
 {
@@ -14,7 +14,7 @@ namespace Northwind.Services.Employees
         /// </summary>
         /// <param name="offset">An offset of the first element to return.</param>
         /// <param name="limit">A limit of elements to return.</param>
-        /// <returns>A <see cref="IList{T}"/> of <see cref="Employee"/>.</returns>
+        /// <returns>A <see cref="IList{T}"/> of <see cref="EmployeeEntity"/>.</returns>
         IAsyncEnumerable<Employee> GetEmployeeAsync(int offset, int limit);
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Northwind.Services.Employees
         /// <summary>
         /// Creates a new product category.
         /// </summary>
-        /// <param name="employee">A <see cref="Employee"/> to create.</param>
+        /// <param name="employee">A <see cref="EmployeeEntity"/> to create.</param>
         /// <returns>An identifier of a created product category.</returns>
         Task<int> CreateEmployeeAsync(Employee employee);
 
@@ -49,7 +49,7 @@ namespace Northwind.Services.Employees
         /// Updates a product category.
         /// </summary>
         /// <param name="employeeId">A product category identifier.</param>
-        /// <param name="employee">A <see cref="Employee"/>.</param>
+        /// <param name="employee">A <see cref="EmployeeEntity"/>.</param>
         /// <returns>True if a product category is updated; otherwise false.</returns>
         Task<bool> UpdateEmployeeAsync(int employeeId, Employee employee);
     }

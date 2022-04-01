@@ -7,8 +7,8 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Northwind.Services.Blogging;
 using Northwind.Services.EntityFrameworkCore.Blogging.Entities;
-using NorthwindWebApp.Context;
-using NorthwindWebApp.Entities;
+using WebAppModule6.Context;
+using WebAppModule6.Entities;
 
 namespace Northwind.Services.EntityFrameworkCore.Blogging
 {
@@ -130,7 +130,7 @@ namespace Northwind.Services.EntityFrameworkCore.Blogging
 
             return true;
         }
-        public async IAsyncEnumerable<Product> GetArticleProductsAsync(int articleId)
+        public async IAsyncEnumerable<ProductEntity> GetArticleProductsAsync(int articleId)
         {
             var article = this.context.Articles.Include(a => a.Products).Where(a => a.ArticleId == articleId).Single();
             var productsInArticle = article.Products;
@@ -157,7 +157,7 @@ namespace Northwind.Services.EntityFrameworkCore.Blogging
             }
 
             
-            var blogProduct = new ProductEntity
+            var blogProduct = new BlogProductEntity
             {
                 ProductId = product.ProductId,
                 ArticleId = article.ArticleId,
@@ -181,7 +181,7 @@ namespace Northwind.Services.EntityFrameworkCore.Blogging
             {
                 return false;
             }
-            var blogProduct = new ProductEntity
+            var blogProduct = new BlogProductEntity
             {
                 ProductId = product.ProductId,
                 ArticleId = article.ArticleId,

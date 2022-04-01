@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using NorthwindWebApp.Entities;
+using WebAppModule6.Entities;
 
 namespace Northwind.Services.Products
 {
@@ -28,7 +28,7 @@ namespace Northwind.Services.Products
         /// <summary>
         /// Creates a new product.
         /// </summary>
-        /// <param name="product">A <see cref="Product"/> to create.</param>
+        /// <param name="product">A <see cref="ProductEntity"/> to create.</param>
         /// <returns>An identifier of a created product.</returns>
         Task<int> CreateProductAsync(Product product);
 
@@ -50,7 +50,7 @@ namespace Northwind.Services.Products
         /// Updates a product.
         /// </summary>
         /// <param name="productId">A product identifier.</param>
-        /// <param name="product">A <see cref="Product"/>.</param>
+        /// <param name="product">A <see cref="ProductEntity"/>.</param>
         /// <returns>True if a product is updated; otherwise false.</returns>
         Task<bool> UpdateProductAsync(int productId, Product product);
 
@@ -58,7 +58,7 @@ namespace Northwind.Services.Products
         /// Shows a list of products that belongs to a specified category.
         /// </summary>
         /// <param name="categoryId">A product category identifier.</param>
-        /// <returns>A <see cref="IList{T}"/> of <see cref="Product"/>.</returns>
+        /// <returns>A <see cref="IList{T}"/> of <see cref="ProductEntity"/>.</returns>
         IAsyncEnumerable<Product> GetProductsForCategoryAsync(int categoryId);
     }
 }

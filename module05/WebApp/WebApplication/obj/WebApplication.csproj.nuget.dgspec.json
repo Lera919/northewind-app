@@ -1,0 +1,647 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\Epam\\northwind-ap\\module05\\WebApp\\WebApplication\\WebApplication.csproj": {}
+  },
+  "projects": {
+    "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.DataAccess.SqlServer\\Northwind.DataAccess.SqlServer.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.DataAccess.SqlServer\\Northwind.DataAccess.SqlServer.csproj",
+        "projectName": "Northwind.DataAccess.SqlServer",
+        "projectPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.DataAccess.SqlServer\\Northwind.DataAccess.SqlServer.csproj",
+        "packagesPath": "C:\\Users\\Rog\\.nuget\\packages\\",
+        "outputPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.DataAccess.SqlServer\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Rog\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.DataAccess\\Northwind.DataAccess.csproj": {
+                "projectPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.DataAccess\\Northwind.DataAccess.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Microsoft.CodeAnalysis.FxCopAnalyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.3.2, )"
+            },
+            "StyleCop.Analyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.1.118, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.DataAccess\\Northwind.DataAccess.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.DataAccess\\Northwind.DataAccess.csproj",
+        "projectName": "Northwind.DataAccess",
+        "projectPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.DataAccess\\Northwind.DataAccess.csproj",
+        "packagesPath": "C:\\Users\\Rog\\.nuget\\packages\\",
+        "outputPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.DataAccess\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Rog\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.EntityFramework\\Northwind.EntityFramework.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.EntityFramework\\Northwind.EntityFramework.csproj",
+        "projectName": "Northwind.EntityFramework",
+        "projectPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.EntityFramework\\Northwind.EntityFramework.csproj",
+        "packagesPath": "C:\\Users\\Rog\\.nuget\\packages\\",
+        "outputPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.EntityFramework\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Rog\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.15, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.15, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.15, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.Services.EntityFrameworkCore.Blogging\\Northwind.Services.EntityFrameworkCore.Blogging.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.Services.EntityFrameworkCore.Blogging\\Northwind.Services.EntityFrameworkCore.Blogging.csproj",
+        "projectName": "Northwind.Services.EntityFrameworkCore.Blogging",
+        "projectPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.Services.EntityFrameworkCore.Blogging\\Northwind.Services.EntityFrameworkCore.Blogging.csproj",
+        "packagesPath": "C:\\Users\\Rog\\.nuget\\packages\\",
+        "outputPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.Services.EntityFrameworkCore.Blogging\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Rog\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.Services\\Northwind.Services.csproj": {
+                "projectPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.Services\\Northwind.Services.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[11.0.1, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.15, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.15, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.15, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.15, )"
+            },
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            },
+            "Microsoft.Extensions.Configuration.EnvironmentVariables": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.Services.EntityFramework\\Northwind.Services.EntityFramework.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.Services.EntityFramework\\Northwind.Services.EntityFramework.csproj",
+        "projectName": "Northwind.Services.EntityFramework",
+        "projectPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.Services.EntityFramework\\Northwind.Services.EntityFramework.csproj",
+        "packagesPath": "C:\\Users\\Rog\\.nuget\\packages\\",
+        "outputPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.Services.EntityFramework\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Rog\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.DataAccess.SqlServer\\Northwind.DataAccess.SqlServer.csproj": {
+                "projectPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.DataAccess.SqlServer\\Northwind.DataAccess.SqlServer.csproj"
+              },
+              "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.DataAccess\\Northwind.DataAccess.csproj": {
+                "projectPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.DataAccess\\Northwind.DataAccess.csproj"
+              },
+              "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.EntityFramework\\Northwind.EntityFramework.csproj": {
+                "projectPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.EntityFramework\\Northwind.EntityFramework.csproj"
+              },
+              "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.Services.EntityFrameworkCore.Blogging\\Northwind.Services.EntityFrameworkCore.Blogging.csproj": {
+                "projectPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.Services.EntityFrameworkCore.Blogging\\Northwind.Services.EntityFrameworkCore.Blogging.csproj"
+              },
+              "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.Services\\Northwind.Services.csproj": {
+                "projectPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.Services\\Northwind.Services.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Bogus": {
+              "target": "Package",
+              "version": "[34.0.1, )"
+            },
+            "Microsoft.CodeAnalysis.FxCopAnalyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.3.2, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.15, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.15, )"
+            },
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[5.0.15, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.15, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.15, )"
+            },
+            "StyleCop.Analyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.1.118, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.Services\\Northwind.Services.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.Services\\Northwind.Services.csproj",
+        "projectName": "Northwind.Services",
+        "projectPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.Services\\Northwind.Services.csproj",
+        "packagesPath": "C:\\Users\\Rog\\.nuget\\packages\\",
+        "outputPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.Services\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Rog\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.EntityFramework\\Northwind.EntityFramework.csproj": {
+                "projectPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.EntityFramework\\Northwind.EntityFramework.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Epam\\northwind-ap\\module05\\WebApp\\Services.DataAccess\\Northwind.Services.DataAccess.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Services.DataAccess\\Northwind.Services.DataAccess.csproj",
+        "projectName": "Northwind.Services.DataAccess",
+        "projectPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Services.DataAccess\\Northwind.Services.DataAccess.csproj",
+        "packagesPath": "C:\\Users\\Rog\\.nuget\\packages\\",
+        "outputPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Services.DataAccess\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Rog\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.DataAccess\\Northwind.DataAccess.csproj": {
+                "projectPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.DataAccess\\Northwind.DataAccess.csproj"
+              },
+              "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.EntityFramework\\Northwind.EntityFramework.csproj": {
+                "projectPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.EntityFramework\\Northwind.EntityFramework.csproj"
+              },
+              "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.Services\\Northwind.Services.csproj": {
+                "projectPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.Services\\Northwind.Services.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[11.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Epam\\northwind-ap\\module05\\WebApp\\WebApplication\\WebApplication.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Epam\\northwind-ap\\module05\\WebApp\\WebApplication\\WebApplication.csproj",
+        "projectName": "WebApplication",
+        "projectPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\WebApplication\\WebApplication.csproj",
+        "packagesPath": "C:\\Users\\Rog\\.nuget\\packages\\",
+        "outputPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\WebApplication\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Rog\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.DataAccess.SqlServer\\Northwind.DataAccess.SqlServer.csproj": {
+                "projectPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.DataAccess.SqlServer\\Northwind.DataAccess.SqlServer.csproj"
+              },
+              "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.DataAccess\\Northwind.DataAccess.csproj": {
+                "projectPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.DataAccess\\Northwind.DataAccess.csproj"
+              },
+              "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.EntityFramework\\Northwind.EntityFramework.csproj": {
+                "projectPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.EntityFramework\\Northwind.EntityFramework.csproj"
+              },
+              "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.Services.EntityFrameworkCore.Blogging\\Northwind.Services.EntityFrameworkCore.Blogging.csproj": {
+                "projectPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.Services.EntityFrameworkCore.Blogging\\Northwind.Services.EntityFrameworkCore.Blogging.csproj"
+              },
+              "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.Services.EntityFramework\\Northwind.Services.EntityFramework.csproj": {
+                "projectPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.Services.EntityFramework\\Northwind.Services.EntityFramework.csproj"
+              },
+              "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.Services\\Northwind.Services.csproj": {
+                "projectPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.Services\\Northwind.Services.csproj"
+              },
+              "D:\\Epam\\northwind-ap\\module05\\WebApp\\Services.DataAccess\\Northwind.Services.DataAccess.csproj": {
+                "projectPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Services.DataAccess\\Northwind.Services.DataAccess.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[11.0.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.15, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[5.0.15, 5.0.15]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

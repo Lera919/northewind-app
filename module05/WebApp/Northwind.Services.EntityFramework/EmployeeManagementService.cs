@@ -8,12 +8,13 @@ namespace Northwind.Services.Employees
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using AutoMapper;
     using Bogus;
     using Microsoft.EntityFrameworkCore;
     using Northwind.DataAccess;
     using Northwind.Services.EntityFrameworkCore.Blogging;
-    using NorthwindWebApp.Context;
-    using NorthwindWebApp.Entities;
+    using WebAppModule6.Context;
+    using WebAppModule6.Entities;
 
     /// <summary>
     /// Represents a management service for employees.
@@ -22,22 +23,24 @@ namespace Northwind.Services.Employees
     {
         private readonly NorthwindContext context;
         private readonly BloggingContext bloggingContext;
+        private readonly IMapper mapper;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EmployeeManagementService"/> class.
         /// </summary>
         /// <param name="contex">Northwind context.</param>
         /// <param name="bloggingContext">Blogging context.</param>
-        public EmployeeManagementService(NorthwindContext contex, BloggingContext bloggingContext)
+        public EmployeeManagementService(NorthwindContext contex, BloggingContext bloggingContext, IMapper mapper)
         {
             this.context = contex;
             this.bloggingContext = bloggingContext;
+            this.mapper = mapper;
         }
 
         /// <inheritdoc/>
         public async Task<int> CreateEmployeeAsync(Employee employee)
         {
-            this.context.Employees.Add(employee);
+            this.context.Employees.Add(this.mapper.Map<EmployeeEntity>(employee));
             int rowsAffected = await this.context.SaveChangesAsync().ConfigureAwait(false);
             return rowsAffected;
         }
@@ -49,7 +52,7 @@ namespace Northwind.Services.Employees
             if (result)
             {
                 this.context.EmployeeTerritories.RemoveRange(this.context.EmployeeTerritories.Where(terr => terr.EmployeeId == employeeId));
-                this.context.Employees.Remove(employee);
+                this.context.Employees.Remove(this.mapper.Map<EmployeeEntity>(employee));
                 var employeesArticles = this.bloggingContext.Articles.Where(article => article.AuthorId == employeeId);
                 this.bloggingContext.RemoveRange(employeesArticles);
                 await this.context.SaveChangesAsync().ConfigureAwait(false);
@@ -60,18 +63,28 @@ namespace Northwind.Services.Employees
         }
 
         /// <inheritdoc/>
-        public IAsyncEnumerable<Employee> GetEmployeeAsync(int offset, int limit)
-         => this.context.Employees.Skip(offset).Take(limit).OrderBy(em => em.EmployeeId).AsAsyncEnumerable();
+        public async IAsyncEnumerable<Employee> GetEmployeeAsync(int offset, int limit)
+        {
+            await foreach (var employee in this.context.Employees.Skip(offset).Take(limit).OrderBy(em => em.EmployeeId).AsAsyncEnumerable())
+            {
+                yield return this.mapper.Map<Employee>(employee);
+            }
+        }
 
         /// <inheritdoc/>
-        public IAsyncEnumerable<Employee> LookupEmployeeByNameAsync(IList<string> names)
-        => this.context.Employees.Where(em => names.Contains(em.FirstName)).OrderBy(em => em.EmployeeId).AsAsyncEnumerable();
+        public async IAsyncEnumerable<Employee> LookupEmployeeByNameAsync(IList<string> names)
+        { 
+            await foreach (var employee in this.context.Employees.Where(em => names.Contains(em.FirstName)).OrderBy(em => em.EmployeeId).AsAsyncEnumerable())
+            {
+                yield return this.mapper.Map<Employee>(employee);
+            }
+        }
 
         /// <inheritdoc/>
         public async Task<(bool result, Employee employee)> TryGetEmployeeAsync(int employeeId)
         {
             var employee = await this.context.Employees.FindAsync(employeeId).ConfigureAwait(false);
-            return (employee != null, employee);
+            return (employee != null, this.mapper.Map<Employee>(employee));
         }
 
         /// <inheritdoc/>
@@ -90,7 +103,7 @@ namespace Northwind.Services.Employees
             else
             {
                 employee.EmployeeId = employeeId;
-                this.context.Employees.Update(employee);
+                this.context.Employees.Update(this.mapper.Map<EmployeeEntity>(employee));
                 await this.context.SaveChangesAsync().ConfigureAwait(false);
                 return true;
             }

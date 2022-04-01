@@ -27,7 +27,7 @@ namespace Northwind.Services.EntityFrameworkCore.Blogging.Entities
         public int AuthorId { get; set; }
 
         [Column("Blog_Products")]
-        public ICollection<ProductEntity> Products { get; set; }
+        public ICollection<BlogProductEntity> Products { get; set; }
 
         [Column("Blog_Commentss")]
         public ICollection<BlogCommentEntity> Comments { get; set; }

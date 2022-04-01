@@ -16,13 +16,13 @@ using Northwind.Services.Employees;
 using Northwind.Services.EntityFrameworkCore;
 using Northwind.Services.EntityFrameworkCore.Blogging;
 using Northwind.Services.Products;
-using NorthwindWebApp.Context;
+using WebAppModule6.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace NorthwindWebApp
+namespace WebAppModule6
 {
     public class Startup
     {
@@ -36,7 +36,7 @@ namespace NorthwindWebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers().AddNewtonsoftJson();
+            services.AddControllersWithViews().AddNewtonsoftJson();
             //services.AddTransient<MemoryDataCreator>();
             services.AddDbContext<NorthwindContext>(opt =>
                  opt.UseSqlServer("data source=(localdb)\\MSSQLLocalDB;Integrated Security=True;Database=Northwind;"));
@@ -70,7 +70,9 @@ namespace NorthwindWebApp
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                     name: "default",
+                     pattern: "{controller=Employee}/{action=GetAll}/{id?}");
             });
         }
     }

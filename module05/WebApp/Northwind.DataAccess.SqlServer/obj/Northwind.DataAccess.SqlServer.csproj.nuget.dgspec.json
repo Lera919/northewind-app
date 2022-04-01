@@ -1,0 +1,138 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.DataAccess.SqlServer\\Northwind.DataAccess.SqlServer.csproj": {}
+  },
+  "projects": {
+    "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.DataAccess.SqlServer\\Northwind.DataAccess.SqlServer.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.DataAccess.SqlServer\\Northwind.DataAccess.SqlServer.csproj",
+        "projectName": "Northwind.DataAccess.SqlServer",
+        "projectPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.DataAccess.SqlServer\\Northwind.DataAccess.SqlServer.csproj",
+        "packagesPath": "C:\\Users\\Rog\\.nuget\\packages\\",
+        "outputPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.DataAccess.SqlServer\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Rog\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.DataAccess\\Northwind.DataAccess.csproj": {
+                "projectPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.DataAccess\\Northwind.DataAccess.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Microsoft.CodeAnalysis.FxCopAnalyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.3.2, )"
+            },
+            "StyleCop.Analyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.1.118, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.DataAccess\\Northwind.DataAccess.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.DataAccess\\Northwind.DataAccess.csproj",
+        "projectName": "Northwind.DataAccess",
+        "projectPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.DataAccess\\Northwind.DataAccess.csproj",
+        "packagesPath": "C:\\Users\\Rog\\.nuget\\packages\\",
+        "outputPath": "D:\\Epam\\northwind-ap\\module05\\WebApp\\Northwind.DataAccess\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Rog\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using System.Net.Mime;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Northwind.Services;
 using Northwind.Services.Employees;
 using Northwind.Services.Products;
-using NorthwindWebApp.Entities;
+using WebApp.Models;
+using WebAppModule6.Entities;
 
-namespace NorthwindWebApp.Controllers
+namespace WebAppModule6.Controllers
 {
     [ApiController]
     [ApiConventionType(typeof(DefaultApiConventions))]
@@ -17,10 +19,14 @@ namespace NorthwindWebApp.Controllers
     [Route("api/[controller]")]
     public class EmployeeController : Controller
     {
-        public EmployeeController(IEmployeeManagementService managementService, IPhotoManagamentService managementPictureService)
+        private readonly IMapper mapper;
+
+        public EmployeeController(IMapper mapper, IEmployeeManagementService managementService, IPhotoManagamentService managementPhotoService)
         {
+            this.mapper = mapper;
             this.ManagementService = managementService ?? throw new ArgumentNullException(nameof(managementService));
-            this.ManagementPhotoService = managementPictureService ?? throw new ArgumentNullException(nameof(managementPictureService));
+            this.ManagementPhotoService = managementPhotoService ?? throw new ArgumentNullException(nameof(managementPhotoService));
+    
         }
 
         IEmployeeManagementService ManagementService { get; set; }
@@ -29,17 +35,20 @@ namespace NorthwindWebApp.Controllers
 
         [HttpGet]
         [HttpGet("{limit}/{offset}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Employee))]
-        public async IAsyncEnumerable<Employee> GetAll(int offset = 0, int limit = 10)
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(EmployeeEntity))]
+        public async Task<IActionResult> GetAll(int offset = 0, int limit = 10)
         {
+            List<EmployeeViewModel> result = new List<EmployeeViewModel>(0);
             await foreach (var employee in this.ManagementService.GetEmployeeAsync(offset, limit))
             {
-                yield return employee;
+                result.Add(this.mapper.Map<EmployeeViewModel>(employee));
+                 
             }
+            return View(result);
         }
 
         [HttpGet("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Category))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CategoryEntity))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetById(int id)
         {

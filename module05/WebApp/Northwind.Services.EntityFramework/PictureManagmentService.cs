@@ -12,8 +12,8 @@ namespace Northwind.Services.Products
     using System.Threading.Tasks;
     using Bogus;
     using Northwind.DataAccess;
-    using NorthwindWebApp.Context;
-    using NorthwindWebApp.Entities;
+    using WebAppModule6.Context;
+    using WebAppModule6.Entities;
 
     /// <summary>
     /// PictureManagmentService.

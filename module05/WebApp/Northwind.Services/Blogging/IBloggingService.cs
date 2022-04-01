@@ -1,4 +1,4 @@
-﻿using NorthwindWebApp.Entities;
+﻿using WebAppModule6.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +18,7 @@ namespace Northwind.Services.Blogging
 
         Task<bool> AddLinkToArticleForProduct(int articleId, int productId);
 
-        IAsyncEnumerable<Product> GetArticleProductsAsync(int articleId);
+        IAsyncEnumerable<ProductEntity> GetArticleProductsAsync(int articleId);
 
         /// <summary>
         /// Shows a list of BlogArticle using specified offset and limit for pagination.

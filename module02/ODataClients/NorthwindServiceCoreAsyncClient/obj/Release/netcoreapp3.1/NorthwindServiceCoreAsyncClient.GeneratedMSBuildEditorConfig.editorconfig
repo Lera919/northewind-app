@@ -1,0 +1,3 @@
+is_global = true
+build_property.RootNamespace = NorthwindServiceCoreAsyncClient
+build_property.ProjectDir = D:\Epam\northwind-ap\module02\ODataClients\NorthwindServiceCoreAsyncClient\

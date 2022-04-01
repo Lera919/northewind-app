@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Northwind.Services;
 using Northwind.Services.Products;
-using NorthwindWebApp.Entities;
+using WebAppModule6.Entities;
 
-namespace NorthwindWebApp.Controllers
+namespace WebAppModule6.Controllers
 {
     [ApiController]
     [ApiConventionType(typeof(DefaultApiConventions))]
@@ -29,8 +29,8 @@ namespace NorthwindWebApp.Controllers
 
         [HttpGet]
         [HttpGet("{limit}/{offset}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Category))]
-        public async IAsyncEnumerable<Category> GetAll(int offset = 0, int limit = 10)
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CategoryEntity))]
+        public async IAsyncEnumerable<ProductCategory> GetAll(int offset = 0, int limit = 10)
         {
             await foreach (var product in this.ManagementService.GetCategoriesAsync(offset, limit))
             {
@@ -39,11 +39,11 @@ namespace NorthwindWebApp.Controllers
         }
 
         [HttpGet("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Category))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ProductCategory))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetById(int id)
         {
-            (bool operation, Category category) = await this.ManagementService.TryGetCategoryAsync(id);
+            (bool operation, ProductCategory category) = await this.ManagementService.TryGetCategoryAsync(id);
 
             if (!operation)
             {
@@ -105,7 +105,7 @@ namespace NorthwindWebApp.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Create(Category category)
+        public async Task<IActionResult> Create(ProductCategory category)
         {
             var res = await this.ManagementService.CreateCategoryAsync(category);
             var routeValues = new { id = res};
@@ -128,7 +128,7 @@ namespace NorthwindWebApp.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, Category productCategory)
+        public async Task<IActionResult> Update(int id, ProductCategory productCategory)
         {
             var (result, _) = await this.ManagementService.TryGetCategoryAsync(id);
             if (!result)

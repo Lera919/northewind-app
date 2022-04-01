@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 #nullable disable
 
-namespace NorthwindWebApp.Entities
+namespace WebAppModule6.Entities
 {
     [Table("Order Details")]
     [Index(nameof(OrderId), Name = "OrderID")]
@@ -31,6 +31,6 @@ namespace NorthwindWebApp.Entities
         public virtual Order Order { get; set; }
         [ForeignKey(nameof(ProductId))]
         [InverseProperty("OrderDetails")]
-        public virtual Product Product { get; set; }
+        public virtual ProductEntity Product { get; set; }
     }
 }

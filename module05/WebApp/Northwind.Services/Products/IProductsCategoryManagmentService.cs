@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using NorthwindWebApp.Entities;
+using WebAppModule6.Entities;
 
 namespace Northwind.Services.Products
 {
@@ -16,22 +16,22 @@ namespace Northwind.Services.Products
         /// </summary>
         /// <param name="offset">An offset of the first element to return.</param>
         /// <param name="limit">A limit of elements to return.</param>
-        /// <returns>A <see cref="IList{T}"/> of <see cref="Category"/>.</returns>
-        IAsyncEnumerable<Category> GetCategoriesAsync(int offset, int limit);
+        /// <returns>A <see cref="IList{T}"/> of <see cref="ProductCategory"/>.</returns>
+        IAsyncEnumerable<ProductCategory> GetCategoriesAsync(int offset, int limit);
 
         /// <summary>
         /// Try to show a product category with specified identifier.
         /// </summary>
         /// <param name="categoryId">A product category identifier.</param>
         /// <returns>Returns true if a product category is returned; otherwise false.</returns>
-        Task<(bool result, Category productCategory)> TryGetCategoryAsync(int categoryId);
+        Task<(bool result, ProductCategory productCategory)> TryGetCategoryAsync(int categoryId);
 
         /// <summary>
         /// Creates a new product category.
         /// </summary>
-        /// <param name="productCategory">A <see cref="Category"/> to create.</param>
+        /// <param name="productCategory">A <see cref="ProductCategory"/> to create.</param>
         /// <returns>An identifier of a created product category.</returns>
-        Task<int> CreateCategoryAsync(Category productCategory);
+        Task<int> CreateCategoryAsync(ProductCategory productCategory);
 
         /// <summary>
         /// Destroys an existed product category.
@@ -45,14 +45,14 @@ namespace Northwind.Services.Products
         /// </summary>
         /// <param name="names">A list of product category names.</param>
         /// <returns>A list of product categories with specified names.</returns>
-        IAsyncEnumerable<Category> LookupCategoriesByNameAsync(IList<string> names);
+        IAsyncEnumerable<ProductCategory> LookupCategoriesByNameAsync(IList<string> names);
 
         /// <summary>
         /// Updates a product category.
         /// </summary>
         /// <param name="categoryId">A product category identifier.</param>
-        /// <param name="productCategory">A <see cref="Category"/>.</param>
+        /// <param name="productCategory">A <see cref="ProductCategory"/>.</param>
         /// <returns>True if a product category is updated; otherwise false.</returns>
-        Task<bool> UpdateCategoryAsync(int categoryId, Category productCategory);
+        Task<bool> UpdateCategoryAsync(int categoryId, ProductCategory productCategory);
     }
 }

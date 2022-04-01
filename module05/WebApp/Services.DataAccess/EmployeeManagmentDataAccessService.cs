@@ -5,7 +5,7 @@ using AutoMapper;
 using Northwind.DataAccess;
 using Northwind.DataAccess.Employees;
 using Northwind.Services.Employees;
-using NorthwindWebApp.Entities;
+using WebAppModule6.Entities;
 
 namespace Northwind.Services.DataAccess
 {

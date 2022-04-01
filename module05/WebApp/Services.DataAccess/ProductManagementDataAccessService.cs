@@ -6,7 +6,7 @@ using AutoMapper;
 using Northwind.DataAccess;
 using Northwind.DataAccess.Products;
 using Northwind.Services.Products;
-using NorthwindWebApp.Entities;
+using WebAppModule6.Entities;
 
 namespace Northwind.Services
 {

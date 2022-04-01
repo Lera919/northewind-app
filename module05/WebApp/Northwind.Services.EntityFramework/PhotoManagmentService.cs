@@ -10,7 +10,7 @@ namespace Northwind.Services.EntityFrameworkCore
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
-    using NorthwindWebApp.Context;
+    using WebAppModule6.Context;
 
     /// <summary>
     /// PhotoManagmentService gets employees photoes.

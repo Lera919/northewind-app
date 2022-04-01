@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 #nullable disable
 
-namespace NorthwindWebApp.Entities
+namespace WebAppModule6.Entities
 {
     public partial class EmployeeTerritory
     {
@@ -20,7 +20,7 @@ namespace NorthwindWebApp.Entities
 
         [ForeignKey(nameof(EmployeeId))]
         [InverseProperty("EmployeeTerritories")]
-        public virtual Employee Employee { get; set; }
+        public virtual EmployeeEntity Employee { get; set; }
         [ForeignKey(nameof(TerritoryId))]
         [InverseProperty("EmployeeTerritories")]
         public virtual Territory Territory { get; set; }

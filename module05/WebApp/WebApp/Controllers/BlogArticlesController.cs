@@ -10,9 +10,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Northwind.Services.Blogging;
 using Northwind.Services.Employees;
-using NorthwindWebApp.Entities;
+using WebAppModule6.Entities;
 
-namespace NorthwindWebApp.Controllers
+namespace WebAppModule6.Controllers
 {
     [ApiController]
     [ApiConventionType(typeof(DefaultApiConventions))]
@@ -95,7 +95,7 @@ namespace NorthwindWebApp.Controllers
         [HttpGet("{id}/products")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BlogArticle))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async IAsyncEnumerable<Product> GetByArticleIdAllProducts(int id)
+        public async IAsyncEnumerable<ProductEntity> GetByArticleIdAllProducts(int id)
         {
             var products = this.ArticleManagementService.GetArticleProductsAsync(id);
 

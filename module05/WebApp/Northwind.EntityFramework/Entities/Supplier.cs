@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 #nullable disable
 
-namespace NorthwindWebApp.Entities
+namespace WebAppModule6.Entities
 {
     [Index(nameof(CompanyName), Name = "CompanyName")]
     [Index(nameof(PostalCode), Name = "PostalCode")]
@@ -14,7 +14,7 @@ namespace NorthwindWebApp.Entities
     {
         public Supplier()
         {
-            Products = new HashSet<Product>();
+            Products = new HashSet<ProductEntity>();
         }
 
         [Key]
@@ -44,7 +44,7 @@ namespace NorthwindWebApp.Entities
         [Column(TypeName = "ntext")]
         public string HomePage { get; set; }
 
-        [InverseProperty(nameof(Product.Supplier))]
-        public virtual ICollection<Product> Products { get; set; }
+        [InverseProperty(nameof(ProductEntity.Supplier))]
+        public virtual ICollection<ProductEntity> Products { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 #nullable disable
 
-namespace NorthwindWebApp.Entities
+namespace WebAppModule6.Entities
 {
     [Keyless]
     public partial class Invoice

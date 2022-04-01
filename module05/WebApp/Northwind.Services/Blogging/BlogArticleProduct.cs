@@ -1,4 +1,4 @@
-﻿using NorthwindWebApp.Entities;
+﻿using WebAppModule6.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +11,6 @@ namespace Northwind.Services.Blogging
     {
         public int BloggArticleId { get; set; }
 
-        public Product Products { get; set; }
+        public ProductEntity Products { get; set; }
     }
 }

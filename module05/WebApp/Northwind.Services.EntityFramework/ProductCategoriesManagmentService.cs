@@ -9,11 +9,12 @@ namespace Northwind.Services.Products
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using AutoMapper;
     using Bogus;
     using Microsoft.EntityFrameworkCore;
     using Northwind.DataAccess;
-    using NorthwindWebApp.Context;
-    using NorthwindWebApp.Entities;
+    using WebAppModule6.Context;
+    using WebAppModule6.Entities;
 
     /// <summary>
     /// ProductCategoriesManagmentService.
@@ -21,6 +22,7 @@ namespace Northwind.Services.Products
     public class ProductCategoriesManagmentService : IProductsCategoryManagmentService
     {
         private readonly NorthwindContext context;
+        private readonly IMapper mapper;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ProductCategoriesManagmentService"/> class.
@@ -31,7 +33,7 @@ namespace Northwind.Services.Products
             this.context = contex ?? throw new ArgumentNullException(nameof(contex));
             if (!this.context.Categories.Any())
             {
-                this.context.Categories.AddRange(new Faker<Category>("en")
+                this.context.Categories.AddRange(new Faker<CategoryEntity>("en")
                .RuleFor(x => x.CategoryName, f => f.Commerce.Product())
                .RuleFor(x => x.Description, f => f.Commerce.ProductDescription())
                .Generate(15));
@@ -40,22 +42,27 @@ namespace Northwind.Services.Products
         }
 
         /// <inheritdoc/>
-        public async Task<int> CreateCategoryAsync(Category productCategory)
+        public async Task<int> CreateCategoryAsync(ProductCategory productCategory)
         {
-            this.context.Categories.Add(productCategory);
+            this.context.Categories.Add(this.mapper.Map<CategoryEntity>(productCategory));
             int rowsAffected = await this.context.SaveChangesAsync().ConfigureAwait(false);
             return rowsAffected;
         }
 
         /// <inheritdoc/>
-        public IAsyncEnumerable<Category> LookupCategoriesByNameAsync(IList<string> names)
-        => this.context.Categories.Where(category => names.Contains(category.CategoryName)).OrderBy(category => category.CategoryId).AsAsyncEnumerable();
+        public async IAsyncEnumerable<ProductCategory> LookupCategoriesByNameAsync(IList<string> names)
+        {
+            await foreach (var category in this.context.Categories.Where(category => names.Contains(category.CategoryName)).OrderBy(category => category.CategoryId).AsAsyncEnumerable())
+            {
+                yield return this.mapper.Map<ProductCategory>(category);
+            }
+        }
 
         /// <inheritdoc/>
-        public async Task<(bool result, Category productCategory)> TryGetCategoryAsync(int categoryId)
+        public async Task<(bool result, ProductCategory productCategory)> TryGetCategoryAsync(int categoryId)
         {
             var category = await this.context.Categories.FindAsync(categoryId).ConfigureAwait(false);
-            return (category != null, category);
+            return (category != null, this.mapper.Map<ProductCategory>(category));
         }
 
         /// <inheritdoc/>
@@ -64,7 +71,7 @@ namespace Northwind.Services.Products
             var (result, productCategory) = await this.TryGetCategoryAsync(categoryId).ConfigureAwait(false);
             if (result)
             {
-                this.context.Categories.Remove(productCategory);
+                this.context.Categories.Remove(this.mapper.Map<CategoryEntity>(productCategory));
                 this.context.SaveChanges();
             }
 
@@ -72,11 +79,16 @@ namespace Northwind.Services.Products
         }
 
         /// <inheritdoc/>
-        public IAsyncEnumerable<Category> GetCategoriesAsync(int offset, int limit)
-            => this.context.Categories.OrderBy(category => category.CategoryId).Skip(offset).Take(limit).AsAsyncEnumerable();
+        public async IAsyncEnumerable<ProductCategory> GetCategoriesAsync(int offset, int limit)
+        {
+            await foreach (var category in this.context.Categories.OrderBy(category => category.CategoryId).Skip(offset).Take(limit).AsAsyncEnumerable())
+            {
+                yield return this.mapper.Map<ProductCategory>(category);
+            }
+        }
 
         /// <inheritdoc/>
-        public async Task<bool> UpdateCategoryAsync(int categoryId, Category productCategory)
+        public async Task<bool> UpdateCategoryAsync(int categoryId, ProductCategory productCategory)
         {
             if (productCategory is null)
             {
@@ -95,7 +107,7 @@ namespace Northwind.Services.Products
             }
             else
             {
-                this.context.Categories.Update(productCategory);
+                this.context.Categories.Update(this.mapper.Map<CategoryEntity>(productCategory));
                 await this.context.SaveChangesAsync().ConfigureAwait(false);
                 return true;
             }

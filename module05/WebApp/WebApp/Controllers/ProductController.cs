@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Northwind.Services.Products;
-using NorthwindWebApp.Entities;
+using WebAppModule6.Entities;
 
-namespace NorthwindWebApp.Controllers
+namespace WebAppModule6.Controllers
 {
     [ApiController]
     [ApiConventionType(typeof(DefaultApiConventions))]

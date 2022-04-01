@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 #nullable disable
 
-namespace NorthwindWebApp.Entities
+namespace WebAppModule6.Entities
 {
     [Index(nameof(City), Name = "City")]
     [Index(nameof(CompanyName), Name = "CompanyName")]
