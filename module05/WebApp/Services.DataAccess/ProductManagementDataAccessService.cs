@@ -44,6 +44,33 @@ namespace Northwind.Services
             }
         }
 
+        public async IAsyncEnumerable<Product> LookupProductsByCategoryNameAsync(IList<string> names)
+        {
+           
+            List<int> categoryIdCollection = new List<int>();
+            if (names is null)
+            {
+                await foreach (var category in this.Factory.GetProductCategoryDataAccessObject().SelectProductCategoriesAsync())
+                {
+                    categoryIdCollection.Add(category.Id);
+
+                }
+            }
+            else
+            {
+                await foreach (var category in this.Factory.GetProductCategoryDataAccessObject().SelectProductCategoriesByNameAsync(names))
+                {
+                    categoryIdCollection.Add(category.Id);
+
+                }
+            }
+
+            await foreach (var element in this.Factory.GetProductDataAccessObject().SelectProductByCategoryAsync(categoryIdCollection))
+            {
+                yield return this.mapper.Map<Product>(element);
+            }
+        }
+
         public async IAsyncEnumerable<Product> LookupProductsByNameAsync(IList<string> names)
         {
             await foreach (var element in this.Factory.GetProductDataAccessObject().SelectProductsByNameAsync(names))

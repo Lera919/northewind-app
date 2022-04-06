@@ -16,7 +16,6 @@ namespace WebApp6.Controllers
 {
 
     [Authorize]
-    [ApiController]
     [ApiConventionType(typeof(DefaultApiConventions))]
     [Produces(MediaTypeNames.Application.Json)]
     [Route("api/[controller]")]
@@ -36,9 +35,8 @@ namespace WebApp6.Controllers
 
         IPhotoManagamentService ManagementPhotoService { get; set; }
 
-       
-        [HttpGet]
-        [HttpGet("{offset}/{limit}")]
+
+        [HttpGet("{offset?}/{limit?}")]
         public async Task<IActionResult> GetAll(int offset = 0, int limit = 10)
         {
             List<EmployeeViewModel> result = new List<EmployeeViewModel>();
@@ -52,7 +50,7 @@ namespace WebApp6.Controllers
                 TotalItems = result.Count,
                 CurrentPage = offset / PagingInfo.ItemsPerPage,
             };
-            return View(new PaginationViewModel<EmployeeViewModel> { Collection = result, PagingInfo = pagingInfo }); ;
+            return View(new PaginationEmployeeViewModel { Collection = result, PagingInfo = pagingInfo }); ;
         }
 
         [HttpGet("{id}")]
@@ -98,7 +96,7 @@ namespace WebApp6.Controllers
                 return this.NotFound();
             }
 
-            return result;
+            return View();
         }
 
         [Authorize(Roles = "Employee")]
@@ -127,18 +125,27 @@ namespace WebApp6.Controllers
             return this.CreatedAtAction(nameof(Create), new { id = res }, employee);
         }
 
-        [HttpDelete("{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> Delete(int id)
+        {
+            var (res, employee) = await this.ManagementService.TryGetEmployeeAsync(id);
+            return res ? View(this.mapper.Map<EmployeeViewModel>(employee)) : this.NotFound();
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var res = await this.ManagementService.DestroyEmployeeAsync(id);
             if (res)
             {
-                return this.Ok(id);
+                return RedirectToAction(nameof(GetAll));
             }
             else
             {
                 return this.NotFound();
             }
+
         }
 
         [Authorize(Roles = "Employee")]

@@ -37,7 +37,8 @@ namespace WebApp6
         {
             services.AddControllersWithViews();
             services.AddScoped<MemoryDataCreator>();
-            services.AddDbContext<NorthwindUsersContext>(options => options.UseSqlServer(Configuration.GetConnectionString("USERS")));
+            services.AddDbContext<NorthwindUsersContext>
+                (options => options.UseSqlServer(Configuration.GetConnectionString("USERS")));
 
             // установка конфигурации подключения
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -59,6 +60,9 @@ namespace WebApp6
             services.AddDbContext<BloggingContext>(opt =>
                 opt.UseSqlServer(Configuration.GetConnectionString("NORTHWIND_BLOGGING")).
                 UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
+
+            services.AddDistributedMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -81,13 +85,13 @@ namespace WebApp6
 
             app.UseAuthentication();    // аутентификация
             app.UseAuthorization();     // авторизация
-
+            app.UseSession();
             creator.SeedDate();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                      name: "default",
-                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                     pattern: "{controller=Home}/{action=Index}/");
             });
         }
     }

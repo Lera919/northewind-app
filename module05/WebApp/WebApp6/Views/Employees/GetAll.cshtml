@@ -1,0 +1,69 @@
+﻿@model WebApp6.Models.PaginationEmployeeViewModel
+
+@{
+    ViewData["Title"] = "GetAll";
+}
+
+<h1>GetAll</h1>
+
+<p>
+    @if (User.IsInRole("Employee"))
+    {
+        <a asp-action="Create">Create New</a>
+    }
+
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("FirstName")
+            </th>
+            <th>
+                @Html.DisplayName("LastName")
+            </th>
+            <th>
+                @Html.DisplayName("Photo")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Collection)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+                
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+
+            <td>
+                <img src='@Url.Action("GetPhoto","Employees", new {id = item.EmployeeId})'>
+                @Html.DisplayFor(modelItem => item.Photo)
+            </td>
+
+                @if (User.IsInRole("Employee"))
+                {
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {id = item.EmployeeId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.EmployeeId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.EmployeeId })
+            </td>
+            }
+            else
+            {
+
+            }
+        </tr>
+        }
+    </tbody>
+</table>
+
+<h1>
+
+    current page @Model.PagingInfo.CurrentPage
+</h1>
+@Html.ActionLink("NextPage", "GetAll", "Employees", new { offset = ++Model.PagingInfo.CurrentPage * PagingInfo.ItemsPerPage, limit = PagingInfo.ItemsPerPage }, null)

@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - Northwind</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/tableStyles.css" />
 </head>
 <body>
     <header>
@@ -19,7 +20,7 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="GetAll">Employees</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Employees" asp-action="GetAll">Employees</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="GetAll">Products</a>
@@ -35,12 +36,10 @@
         </nav>
     </header>
     <div class="container">
-        <div id="categories">
-            Will put something useful here later
-        </div>
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
+    </div>
     </div>
 
     <footer class="border-top footer text-muted">

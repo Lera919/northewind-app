@@ -28,6 +28,13 @@ namespace Northwind.Services.DataAccess
         public async Task<bool> DestroyCategoryAsync(int categoryId)
             => await this.Factory.GetProductCategoryDataAccessObject().DeleteProductCategoryAsync(categoryId);
 
+        public async IAsyncEnumerable<ProductCategory> GetAllCategoriesAsync()
+        {
+            await foreach (var element in this.Factory.GetProductCategoryDataAccessObject().SelectProductCategoriesAsync())
+            {
+                yield return this.mapper.Map<ProductCategory>(element);
+            }
+        }
 
         public async IAsyncEnumerable<ProductCategory> GetCategoriesAsync(int offset, int limit)
         {

@@ -48,7 +48,8 @@ namespace Northwind.Services.Employees
         /// <inheritdoc/>
         public async Task<bool> DestroyEmployeeAsync(int employeeId)
         {
-            var (result, employee) = await this.TryGetEmployeeAsync(employeeId).ConfigureAwait(false);
+            var employee = await this.context.Employees.FindAsync(employeeId).ConfigureAwait(false);
+            var result = employee is not null;
             if (result)
             {
                 this.context.EmployeeTerritories.RemoveRange(this.context.EmployeeTerritories.Where(terr => terr.EmployeeId == employeeId));
@@ -73,7 +74,7 @@ namespace Northwind.Services.Employees
 
         /// <inheritdoc/>
         public async IAsyncEnumerable<Employee> LookupEmployeeByNameAsync(IList<string> names)
-        { 
+        {
             await foreach (var employee in this.context.Employees.Where(em => names.Contains(em.FirstName)).OrderBy(em => em.EmployeeId).AsAsyncEnumerable())
             {
                 yield return this.mapper.Map<Employee>(employee);
@@ -95,18 +96,10 @@ namespace Northwind.Services.Employees
                 throw new ArgumentNullException(nameof(employee));
             }
 
-            var toUpdate = await this.context.Employees.FindAsync(employeeId).ConfigureAwait(false);
-            if (toUpdate is null)
-            {
-                return false;
-            }
-            else
-            {
-                employee.EmployeeId = employeeId;
-                this.context.Employees.Update(this.mapper.Map<EmployeeEntity>(employee));
-                await this.context.SaveChangesAsync().ConfigureAwait(false);
-                return true;
-            }
+            this.context.Employees.Update(this.mapper.Map<EmployeeEntity>(employee));
+            await this.context.SaveChangesAsync().ConfigureAwait(false);
+            return true;
+
         }
     }
 }

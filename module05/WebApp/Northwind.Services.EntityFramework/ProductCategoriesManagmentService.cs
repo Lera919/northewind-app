@@ -28,17 +28,10 @@ namespace Northwind.Services.Products
         /// Initializes a new instance of the <see cref="ProductCategoriesManagmentService"/> class.
         /// </summary>
         /// <param name="contex">Northwind contex.</param>
-        public ProductCategoriesManagmentService(NorthwindContext contex)
+        public ProductCategoriesManagmentService(NorthwindContext contex, IMapper mapper)
         {
             this.context = contex ?? throw new ArgumentNullException(nameof(contex));
-            if (!this.context.Categories.Any())
-            {
-                this.context.Categories.AddRange(new Faker<CategoryEntity>("en")
-               .RuleFor(x => x.CategoryName, f => f.Commerce.Product())
-               .RuleFor(x => x.Description, f => f.Commerce.ProductDescription())
-               .Generate(15));
-                this.context.SaveChanges();
-            }
+            this.mapper = mapper;
         }
 
         /// <inheritdoc/>
@@ -110,6 +103,14 @@ namespace Northwind.Services.Products
                 this.context.Categories.Update(this.mapper.Map<CategoryEntity>(productCategory));
                 await this.context.SaveChangesAsync().ConfigureAwait(false);
                 return true;
+            }
+        }
+
+        public async IAsyncEnumerable<ProductCategory> GetAllCategoriesAsync()
+        {
+            await foreach (var category in this.context.Categories.OrderBy(x => x.CategoryId).AsAsyncEnumerable())
+            {
+                yield return this.mapper.Map<ProductCategory>(category);
             }
         }
     }

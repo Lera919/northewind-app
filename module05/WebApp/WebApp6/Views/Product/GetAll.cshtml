@@ -1,65 +1,91 @@
-﻿@model WebApp6.Models.PaginationViewModel<ProductViewModel>
+﻿@model WebApp6.Models.PaginationProductViewModel
 
 @{
     ViewData["Title"] = "GetAll";
 }
-
+@*<head>
+        <link rel="stylesheet" href="~/css/tableStyles.css" />
+    </head>*@
 <h1>NorthwindProducts</h1>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayName("Product")
-            </th>
-            <th>
-                @Html.DisplayName("Category")
-            </th>
-            <th>
-                @Html.DisplayName("Price")
-            </th>
-            <th>
-                @Html.DisplayName("Units in stock")
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Collection)
-        {
-            var price = item.UnitPrice.ToString("c");
+<p>
+    @if (User.IsInRole("Employee"))
+    {
+        <a asp-action="Create">Create New</a>
+    }
+
+</p>
+<div class="block-left">
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CategoryName)
-                </td>
-
-                <td>
-
-                    @Html.DisplayFor(modelItem => price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UnitsInStock)
-                </td>
-                @if (User.IsInRole("Employee"))
-                 {
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                    </td>
-                }
-                else
-                {
-
-                }
+                <th>
+                    @Html.DisplayName("Product")
+                </th>
+                <th>
+                    @Html.DisplayName("Category")
+                </th>
+                <th>
+                    @Html.DisplayName("Price")
+                </th>
+                <th>
+                    @Html.DisplayName("Units in stock")
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Collection)
+            {
+                var price = item.UnitPrice.ToString("c");
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CategoryName)
+                    </td>
 
-<h1>
-    current page @Model.PagingInfo.CurrentPage
-</h1>
-@Html.ActionLink("NextPage", "GetAll", "Product", new { offset = ++Model.PagingInfo.CurrentPage * PagingInfo.ItemsPerPage, limit = PagingInfo.ItemsPerPage }, null)
+                    <td>
+
+                        @Html.DisplayFor(modelItem => price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UnitsInStock)
+                    </td>
+                    @if (User.IsInRole("Employee"))
+                    {
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @using (Html.BeginForm("Index", "Cart"))
+                            {
+                                @Html.HiddenFor(x => x.Collection.First(x => x.ProductId == item.ProductId).ProductId)
+                                @Html.Hidden("returnUrl", ViewContext.HttpContext.Request.Path)
+                                <input type="submit" value="+ Add to cart" />
+                            }
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+    <h1>
+
+        current page @Model.PagingInfo.CurrentPage
+    </h1>
+    @Html.ActionLink("NextPage", "GetAll", "Product", new { page = ++Model.PagingInfo.CurrentPage, category = Model.CurrentCategory }, null)
+
+
+</div>
+
+
+<div class="block-right">
+
+    @await Component.InvokeAsync("NavigationMenu")
+</div>

@@ -170,7 +170,6 @@ D:\Epam\northwind-ap\module05\WebApp\WebApp6\bin\Debug\net5.0\zh-Hans\Microsoft.
 D:\Epam\northwind-ap\module05\WebApp\WebApp6\bin\Debug\net5.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 D:\Epam\northwind-ap\module05\WebApp\WebApp6\bin\Debug\net5.0\runtimes\win-arm\lib\net5.0\dotnet-aspnet-codegenerator-design.exe
 D:\Epam\northwind-ap\module05\WebApp\WebApp6\bin\Debug\net5.0\runtimes\win-arm64\lib\net5.0\dotnet-aspnet-codegenerator-design.exe
-D:\Epam\northwind-ap\module05\WebApp\WebApp6\obj\Debug\net5.0\Razor\Views\Employee\GetAll.cshtml.g.cs
 D:\Epam\northwind-ap\module05\WebApp\WebApp6\bin\Debug\net5.0\BCrypt.Net-Next.dll
 D:\Epam\northwind-ap\module05\WebApp\WebApp6\bin\Debug\net5.0\Northwind.Authentication.dll
 D:\Epam\northwind-ap\module05\WebApp\WebApp6\bin\Debug\net5.0\Northwind.Authentication.pdb
@@ -179,3 +178,14 @@ D:\Epam\northwind-ap\module05\WebApp\WebApp6\obj\Debug\net5.0\Razor\Views\Accoun
 D:\Epam\northwind-ap\module05\WebApp\WebApp6\obj\Debug\net5.0\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
 D:\Epam\northwind-ap\module05\WebApp\WebApp6\obj\Debug\net5.0\Razor\Views\Product\GetAll.cshtml.g.cs
 D:\Epam\northwind-ap\module05\WebApp\WebApp6\obj\Debug\net5.0\Razor\Views\Shared\_ProductActionPartial.cshtml.g.cs
+D:\Epam\northwind-ap\module05\WebApp\WebApp6\obj\Debug\net5.0\Razor\Views\Employees\Delete.cshtml.g.cs
+D:\Epam\northwind-ap\module05\WebApp\WebApp6\obj\Debug\net5.0\Razor\Views\Employees\DeletePhoto.cshtml.g.cs
+D:\Epam\northwind-ap\module05\WebApp\WebApp6\obj\Debug\net5.0\Razor\Views\Employees\GetAll.cshtml.g.cs
+D:\Epam\northwind-ap\module05\WebApp\WebApp6\obj\Debug\net5.0\Razor\Views\Employees\Details.cshtml.g.cs
+D:\Epam\northwind-ap\module05\WebApp\WebApp6\obj\Debug\net5.0\Razor\Views\Employees\Create.cshtml.g.cs
+D:\Epam\northwind-ap\module05\WebApp\WebApp6\obj\Debug\net5.0\Razor\Views\Employees\Edit.cshtml.g.cs
+D:\Epam\northwind-ap\module05\WebApp\WebApp6\obj\Debug\net5.0\Razor\Views\Cart\Index.cshtml.g.cs
+D:\Epam\northwind-ap\module05\WebApp\WebApp6\obj\Debug\net5.0\Razor\Views\Shared\_CartLayout.cshtml.g.cs
+D:\Epam\northwind-ap\module05\WebApp\WebApp6\obj\Debug\net5.0\Razor\Views\Product\Details.cshtml.g.cs
+D:\Epam\northwind-ap\module05\WebApp\WebApp6\obj\Debug\net5.0\Razor\Views\Product\Create.cshtml.g.cs
+D:\Epam\northwind-ap\module05\WebApp\WebApp6\obj\Debug\net5.0\Razor\Views\Shared\Components\NavigationMenu\Default.cshtml.g.cs

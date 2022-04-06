@@ -5,10 +5,14 @@ using System.Threading.Tasks;
 
 namespace WebApp6.Models
 {
-    public class PaginationViewModel<T>
+    public class PaginationProductViewModel
     {
-        public IEnumerable<T> Collection { get; set; }
+        public IEnumerable<ProductViewModel> Collection { get; set; }
 
         public PagingInfo PagingInfo { get; set; }
+
+        public string CurrentCategory { get; set; }
+
+
     }
 }

@@ -47,6 +47,13 @@ namespace Northwind.Services.Products
         IAsyncEnumerable<Product> LookupProductsByNameAsync(IList<string> names);
 
         /// <summary>
+        /// Looks up for product with specified names.
+        /// </summary>
+        /// <param name="names">A list of product names.</param>
+        /// <returns>A list of products with specified names.</returns>
+        IAsyncEnumerable<Product> LookupProductsByCategoryNameAsync(IList<string> names);
+
+        /// <summary>
         /// Updates a product.
         /// </summary>
         /// <param name="productId">A product identifier.</param>

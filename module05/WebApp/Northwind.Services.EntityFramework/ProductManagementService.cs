@@ -68,7 +68,7 @@ namespace Northwind.Services.Products
         /// <inheritdoc/>
         public async IAsyncEnumerable<Product> GetProductsForCategoryAsync(int categoryId)
         {
-            await foreach(var product in this.context.Products.Include(a => a.Category).Where(prod => prod.CategoryId == categoryId).OrderBy(product => product.ProductId).AsAsyncEnumerable())
+            await foreach (var product in this.context.Products.Include(a => a.Category).Where(prod => prod.CategoryId == categoryId).OrderBy(product => product.ProductId).AsAsyncEnumerable())
             {
                 yield return this.mapper.Map<Product>(product);
             }
@@ -78,6 +78,28 @@ namespace Northwind.Services.Products
         public async IAsyncEnumerable<Product> LookupProductsByNameAsync(IList<string> names)
         {
             await foreach (var product in this.context.Products.Include(a => a.Category).Where(prod => names.Contains(prod.ProductName)).OrderBy(prod => prod.ProductId).AsAsyncEnumerable())
+            {
+                yield return this.mapper.Map<Product>(product);
+            }
+        }
+
+        /// <inheritdoc/>
+        public async IAsyncEnumerable<Product> LookupProductsByCategoryNameAsync(IList<string> names)
+        {
+            //var products = this.context.Products.Include(a => a.Category);
+            //await foreach (var product in products.Where(prod => names == null || names.Contains(prod.Category.CategoryName)).Include(a => a.Category).OrderBy(prod => prod.ProductId).AsAsyncEnumerable())
+            //{
+            //    yield return this.mapper.Map<Product>(product);
+            //}
+
+            var products = from q in this.context.Products
+                            from sq in this.context.Categories
+                            where sq.CategoryId == q.CategoryId
+                            && (names == null || names.Contains(sq.CategoryName))
+                            select q;
+
+            var productsWithInclude = products.Include(a => a.Category);
+            await foreach (var product in productsWithInclude.AsAsyncEnumerable())
             {
                 yield return this.mapper.Map<Product>(product);
             }
@@ -115,5 +137,6 @@ namespace Northwind.Services.Products
                 property.SetValue(updateEntity, property.GetValue(newEntity));
             }
         }
+
     }
 }

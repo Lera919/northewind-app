@@ -11,6 +11,7 @@ namespace Northwind.Services.Products
     /// </summary>
     public interface IProductsCategoryManagmentService
     {
+        IAsyncEnumerable<ProductCategory> GetAllCategoriesAsync();
         /// <summary>
         /// Shows a list of product categories using specified offset and limit for pagination.
         /// </summary>

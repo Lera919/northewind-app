@@ -1,38 +1,35 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Northwind.Services.Products;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Mime;
 using System.Threading.Tasks;
 using WebApp6.Models;
 
 namespace WebApp6.Controllers
 {
-    [ApiController]
-    [ApiConventionType(typeof(DefaultApiConventions))]
-    [Produces(MediaTypeNames.Application.Json)]
-    [Route("api/[controller]")]
+    [Authorize]
     public class ProductController : Controller
     {
         private readonly IMapper mapper;
-        public ProductController(IProductManagementService managementService, IMapper mapper)
+        public ProductController(IProductManagementService managementService, IProductsCategoryManagmentService categoryService, IMapper mapper)
         {
             this.mapper = mapper;
-            this.ManagementService = managementService;
+            this.ProductManagementService = managementService;
+            this.CategoryManagementService = categoryService;
         }
 
-        IProductManagementService ManagementService { get; set; }
-
-        [HttpGet]
-        [HttpGet("{offset}/{limit}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Product))]
-        public async Task<IActionResult> GetAll(int offset = 0, int limit = 10)
+        IProductManagementService ProductManagementService { get; set; }
+        IProductsCategoryManagmentService CategoryManagementService { get; set; }
+        // GET: ProductController
+        public async Task<IActionResult> GetAll(int page = 1, string category = null)
         {
             List<ProductViewModel> result = new List<ProductViewModel>();
-            await foreach (var product in this.ManagementService.GetProductsAsync(offset, limit))
+            await foreach (var product in this.ProductManagementService.LookupProductsByCategoryNameAsync(category is null ? (string[])null : new string[] { category }))
             {
                 result.Add(this.mapper.Map<ProductViewModel>(product));
 
@@ -40,66 +37,130 @@ namespace WebApp6.Controllers
             var pagingInfo = new PagingInfo
             {
                 TotalItems = result.Count,
-                CurrentPage = offset / PagingInfo.ItemsPerPage,
+                CurrentPage = page,
             };
-            return View(new PaginationViewModel<ProductViewModel> { Collection = result, PagingInfo = pagingInfo }); ;
+            result = result.Skip((page - 1) * PagingInfo.ItemsPerPage).Take(PagingInfo.ItemsPerPage).ToList();
+            return View(new PaginationProductViewModel { Collection = result, PagingInfo = pagingInfo, CurrentCategory = category }); ;
         }
 
-        [HttpGet("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Product))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetById(int id)
+        // GET: ProductController/Details/5
+        public async Task<ActionResult> Details(int id)
         {
-            (bool operation, Product Product) = await this.ManagementService.TryGetProductAsync(id);
+            (bool operation, Product product) = await this.ProductManagementService.TryGetProductAsync(id);
 
             if (!operation)
             {
                 return this.NotFound();
             }
 
-            return this.Ok(Product);
+            return View(this.mapper.Map<ProductViewModel>(product));
         }
 
+        // GET: ProductController/Create
+        [Authorize(Roles = "Employee")]
+        public async Task<ActionResult> Create()
+        {
+            ProductViewModel productViewModel = new ProductViewModel
+            {
+                Categories = await GetSelectListItems(this.CategoryManagementService.GetAllCategoriesAsync()),
+            };
+
+
+            return View(productViewModel);
+        }
+
+        // POST: ProductController/Create
         [HttpPost]
-        public async Task<IActionResult> Create(Product product)
+        [Authorize(Roles = "Employee")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Create(Product product)
         {
-            var res = await this.ManagementService.CreateProductAsync(product);
-
-            product.ProductId = res;
-            return this.CreatedAtAction(nameof(Create), new { id = res }, product);
+            if (ModelState.IsValid)
+            {
+                await this.ProductManagementService.CreateProductAsync(product);
+                return RedirectToAction(nameof(GetAll));
+            }
+            return View(this.mapper.Map<EmployeeViewModel>(product));
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        // GET: ProductController/Edit/5
+        [Authorize(Roles = "Employee")]
+        public async Task<ActionResult> Edit(int id)
         {
-            var res = await this.ManagementService.DestroyProductAsync(id);
+            var (result, product) = await this.ProductManagementService.TryGetProductAsync(id);
+            if (result)
+            {
+                return View(this.mapper.Map<EmployeeViewModel>(product));
+            }
+
+            return this.BadRequest();
+        }
+
+        // POST: ProductController/Edit/5
+        [HttpPost]
+        [Authorize(Roles = "Employee")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(int productId, [Bind] Product product)
+        {
+            if (productId != product.ProductId)
+            {
+                this.BadRequest();
+            }
+
+            if (ModelState.IsValid)
+            {
+                await this.ProductManagementService.UpdateProductAsync(productId, product);
+                return RedirectToAction(nameof(GetAll));
+            }
+            return View(this.mapper.Map<ProductViewModel>(product));
+        }
+
+        // GET: ProductController/Delete/5
+        [Authorize(Roles = "Employee")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var (res, product) = await this.ProductManagementService.TryGetProductAsync(id);
+            return res ? View(this.mapper.Map<ProductViewModel>(product)) : this.NotFound();
+        }
+
+        // POST: ProductController/Delete/5
+        [Authorize(Roles = "Employee")]
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int productId)
+        {
+            var res = await this.ProductManagementService.DestroyProductAsync(productId);
             if (res)
             {
-                return this.Ok(id);
+                return RedirectToAction(nameof(GetAll));
             }
             else
             {
                 return this.NotFound();
             }
+
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, Product product)
+        private async Task<IEnumerable<SelectListItem>> GetSelectListItems(IAsyncEnumerable<ProductCategory> elements)
+
         {
-            var (result, _) = await this.ManagementService.TryGetProductAsync(id);
-            if (!result)
+            // Create an empty list to hold result of the operation
+            var selectList = new List<SelectListItem>();
+
+            // For each string in the 'elements' variable, create a new SelectListItem object
+            // that has both its Value and Text properties set to a particular value.
+            // This will result in MVC rendering each item as:
+            //     <option value="State Name">State Name</option>
+            await foreach (var element in elements)
             {
-                return this.BadRequest();
+                selectList.Add(new SelectListItem
+                {
+                    Value = element.CategoryId.ToString(),
+                    Text = element.CategoryName
+                });
             }
-            var res = await this.ManagementService.UpdateProductAsync(id, product);
-            if (res)
-            {
-                return this.Ok(id);
-            }
-            else
-            {
-                return this.NotFound();
-            }
+
+            return selectList;
         }
     }
 }

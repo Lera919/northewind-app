@@ -117,6 +117,24 @@ namespace Northwind.DataAccess.Products
         }
 
         /// <inheritdoc/>
+        public async IAsyncEnumerable<ProductCategoryTransferObject> SelectProductCategoriesAsync()
+        {
+            using var command = new SqlCommand("SelectProductCategory", this.connection)
+            {
+                CommandType = CommandType.StoredProcedure,
+            };
+
+            await this.connection.OpenAsync().ConfigureAwait(false);
+            using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+            {
+                while (await reader.ReadAsync().ConfigureAwait(false))
+                {
+                    yield return CreateProductCategory(reader);
+                }
+            }
+        }
+
+        /// <inheritdoc/>
         async IAsyncEnumerable<ProductCategoryTransferObject> IProductCategoryDataAccessObject.SelectProductCategoriesAsync(int offset, int limit)
         {
             if (offset < 0)
@@ -240,5 +258,6 @@ namespace Northwind.DataAccess.Products
                 command.Parameters[pictureParameter].Value = DBNull.Value;
             }
         }
+
     }
 }

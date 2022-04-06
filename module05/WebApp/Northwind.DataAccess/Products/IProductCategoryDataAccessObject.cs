@@ -29,6 +29,7 @@ namespace Northwind.DataAccess.Products
         /// <returns>True if a product category is updated; otherwise false.</returns>
         Task<bool> UpdateProductCategoryAsync(ProductCategoryTransferObject productCategory);
 
+
         /// <summary>
         /// Finds a Northwind product category using a specified identifier.
         /// </summary>
@@ -43,6 +44,14 @@ namespace Northwind.DataAccess.Products
         /// <param name="limit">A limit of returned objects.</param>
         /// <returns>A <see cref="List{T}"/> of <see cref="ProductCategoryTransferObject"/>.</returns>
         IAsyncEnumerable<ProductCategoryTransferObject> SelectProductCategoriesAsync(int offset, int limit);
+
+        /// <summary>
+        /// Selects product categories.
+        /// </summary>
+        /// <param name="offset">An offset of the first object.</param>
+        /// <param name="limit">A limit of returned objects.</param>
+        /// <returns>A <see cref="List{T}"/> of <see cref="ProductCategoryTransferObject"/>.</returns>
+        IAsyncEnumerable<ProductCategoryTransferObject> SelectProductCategoriesAsync();
 
         /// <summary>
         /// Selects all Northwind product categories with specified names.
