@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Northwind.DataAccess.Employees;
 using Northwind.DataAccess.Products;
+using Northwind.Services;
 using Northwind.Services.Blogging;
 using Northwind.Services.Employees;
 using Northwind.Services.EntityFrameworkCore.Blogging.Entities;
@@ -39,8 +40,17 @@ namespace WebApp6
             this.CreateMap<CategoryEntity, ProductCategoryTransferObject>();
             this.CreateMap<ProductCategoryTransferObject, CategoryEntity>();
 
+            this.CreateMap<CustomerEntity, Customer>();
+            this.CreateMap<Customer, CustomerEntity>();
+
             this.CreateMap<BlogArticleEntity, BlogArticle>();
-            this.CreateMap<BlogArticle, BlogArticleEntity>();
+            this.CreateMap<BlogArticle, BlogArticleEntity>().ForMember(x => x.AuthorId, x => x.MapFrom(m => m.Author.EmployeeId));
+            this.CreateMap<BlogArticle, ArticleViewModel>()
+                .ForMember(x => x.AuthorName, x => x.MapFrom(m => m.Author.FirstName)).
+                ForMember(x => x.AuthorId, x => x.MapFrom(m=> m.Author.EmployeeId));
+
+            this.CreateMap<BlogComment, BlogCommentViewModel>();
+
         }
     }
 }

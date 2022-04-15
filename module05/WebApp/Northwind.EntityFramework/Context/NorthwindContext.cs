@@ -22,7 +22,7 @@ namespace WebAppModule6.Context
         public virtual DbSet<CategoryEntity> Categories { get; set; }
         public virtual DbSet<CategorySalesFor1997> CategorySalesFor1997s { get; set; }
         public virtual DbSet<CurrentProductList> CurrentProductLists { get; set; }
-        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<CustomerEntity> Customers { get; set; }
         public virtual DbSet<CustomerAndSuppliersByCity> CustomerAndSuppliersByCities { get; set; }
         public virtual DbSet<CustomerCustomerDemo> CustomerCustomerDemos { get; set; }
         public virtual DbSet<CustomerDemographic> CustomerDemographics { get; set; }
@@ -77,7 +77,7 @@ namespace WebAppModule6.Context
                 entity.Property(e => e.ProductId).ValueGeneratedOnAdd();
             });
 
-            modelBuilder.Entity<Customer>(entity =>
+            modelBuilder.Entity<CustomerEntity>(entity =>
             {
                 entity.Property(e => e.CustomerId).IsFixedLength(true);
             });

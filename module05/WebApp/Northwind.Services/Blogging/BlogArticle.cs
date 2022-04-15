@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Northwind.Services.Employees;
+using System;
 
 namespace Northwind.Services.Blogging
 {
@@ -12,6 +13,6 @@ namespace Northwind.Services.Blogging
 
         public DateTime PublicationDate { get; set; }
 
-        public int AuthorId { get; set; }
+        public Employee Author { get; set; }
     }
 }

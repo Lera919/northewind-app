@@ -56,7 +56,7 @@ namespace Northwind.Services.EntityFrameworkCore.Blogging.Migrations
                         .HasColumnName("Comment_id")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("BlogArticleEntityArticleId")
+                    b.Property<int?>("ArticleId")
                         .HasColumnType("int");
 
                     b.Property<string>("CustomerId")
@@ -69,12 +69,12 @@ namespace Northwind.Services.EntityFrameworkCore.Blogging.Migrations
 
                     b.HasKey("CommentId");
 
-                    b.HasIndex("BlogArticleEntityArticleId");
+                    b.HasIndex("ArticleId");
 
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("Northwind.Services.EntityFrameworkCore.Blogging.Entities.ProductEntity", b =>
+            modelBuilder.Entity("Northwind.Services.EntityFrameworkCore.Blogging.Entities.BlogProductEntity", b =>
                 {
                     b.Property<int>("ProductId")
                         .HasColumnType("int")
@@ -96,12 +96,15 @@ namespace Northwind.Services.EntityFrameworkCore.Blogging.Migrations
 
             modelBuilder.Entity("Northwind.Services.EntityFrameworkCore.Blogging.Entities.BlogCommentEntity", b =>
                 {
-                    b.HasOne("Northwind.Services.EntityFrameworkCore.Blogging.Entities.BlogArticleEntity", null)
+                    b.HasOne("Northwind.Services.EntityFrameworkCore.Blogging.Entities.BlogArticleEntity", "Article")
                         .WithMany("Comments")
-                        .HasForeignKey("BlogArticleEntityArticleId");
+                        .HasForeignKey("ArticleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Article");
                 });
 
-            modelBuilder.Entity("Northwind.Services.EntityFrameworkCore.Blogging.Entities.ProductEntity", b =>
+            modelBuilder.Entity("Northwind.Services.EntityFrameworkCore.Blogging.Entities.BlogProductEntity", b =>
                 {
                     b.HasOne("Northwind.Services.EntityFrameworkCore.Blogging.Entities.BlogArticleEntity", null)
                         .WithMany("Products")

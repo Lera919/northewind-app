@@ -42,6 +42,11 @@ namespace Northwind.Services.DataAccess
             }
         }
 
+        public Task<(bool, Employee)> TryGetByNameAsync(string name)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<(bool result, Employee employee)> TryGetEmployeeAsync(int employeeId)
         {
             var employee = await this.Factory.GetEmployeeDataAccessObject().FindEmploteeAsync(employeeId);

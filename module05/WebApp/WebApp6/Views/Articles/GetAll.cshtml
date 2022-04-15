@@ -1,0 +1,77 @@
+﻿@model WebApp6.Models.PaginationArticleViewModel
+
+@{
+    ViewData["Title"] = "GetAll";
+}
+
+<h1>GetAll</h1>
+
+<p>
+    @if (User.IsInRole("Employee"))
+    {
+        <a asp-action="Create">Create New</a>
+    }
+
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("Author")
+            </th>
+            <th>
+                @Html.DisplayName("Title")
+            </th>
+            <th>
+                @Html.DisplayName("Publication Date")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Collection)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AuthorName)
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.PublicationDate)
+                </td>
+
+                @if (User.IsInRole("Employee") && ViewBag.NorthwindId == item.AuthorId)
+                {
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ArticleId }) |
+                        @Html.ActionLink("Read", "Details", new { id = item.ArticleId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ArticleId })
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Html.ActionLink("Read", "Details", new { id = item.ArticleId })
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h1>
+
+    current page @Model.PagingInfo.CurrentPage
+</h1>
+@if (Model.PagingInfo.CurrentPage < Model.PagingInfo.TotalPages)
+{
+    @Html.ActionLink("NextPage", "GetAll", "Articles", new { page = ++Model.PagingInfo.CurrentPage }, null)
+}
+@if (Model.PagingInfo.CurrentPage > 0)
+{
+    @Html.ActionLink("PrevPage", "GetAll", "Articles", new { page = --Model.PagingInfo.CurrentPage }, null)
+}

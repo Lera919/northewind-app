@@ -1,0 +1,64 @@
+﻿@model WebApp6.Models.PaginationBlogCommentViewModel
+
+@{
+    ViewData["Title"] = "GetAll";
+}
+
+<h1>Comments</h1>
+
+<p>
+    @if (User.IsInRole("Customer"))
+    {
+        @Html.ActionLink("Add comment", "CreateComment", new { articleId = Model.ArticleId })
+}
+
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("Author")
+            </th>
+            <th>
+                @Html.DisplayName("Text")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Collection)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CommentAuthorName)
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Text)
+                </td>
+
+                
+                @if (User.IsInRole("Customer") && ViewBag.NorthwindId == item.CustomerId)
+                {
+                    <td>
+                        @Html.ActionLink("Edit", "EditComment", new { id = item.ArticleId }) |
+                        @Html.ActionLink("Delete", "DeleteComment", new { id = item.ArticleId })
+                    </td>
+                }
+                else
+                if(User.IsInRole("Employee"))
+                {
+                    <td>
+                        @Html.ActionLink("Delete", "DeleteComment", new { id = item.ArticleId })
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h1>
+
+    current page @Model.PagingInfo.CurrentPage
+</h1>
+@Html.ActionLink("NextPage", "GetAll", "Articles", new { offset = ++Model.PagingInfo.CurrentPage * PagingInfo.ItemsPerPage, limit = PagingInfo.ItemsPerPage }, null)

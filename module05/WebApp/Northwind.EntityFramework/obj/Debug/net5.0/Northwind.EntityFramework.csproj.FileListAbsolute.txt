@@ -2,7 +2,6 @@ D:\Epam\northwind-ap\module05\WebApp\Northwind.EntityFramework\bin\Debug\net5.0\
 D:\Epam\northwind-ap\module05\WebApp\Northwind.EntityFramework\bin\Debug\net5.0\Northwind.EntityFramework.runtimeconfig.json
 D:\Epam\northwind-ap\module05\WebApp\Northwind.EntityFramework\bin\Debug\net5.0\Northwind.EntityFramework.runtimeconfig.dev.json
 D:\Epam\northwind-ap\module05\WebApp\Northwind.EntityFramework\bin\Debug\net5.0\Northwind.EntityFramework.dll
-D:\Epam\northwind-ap\module05\WebApp\Northwind.EntityFramework\bin\Debug\net5.0\ref\Northwind.EntityFramework.dll
 D:\Epam\northwind-ap\module05\WebApp\Northwind.EntityFramework\bin\Debug\net5.0\Northwind.EntityFramework.pdb
 D:\Epam\northwind-ap\module05\WebApp\Northwind.EntityFramework\obj\Debug\net5.0\Northwind.EntityFramework.csproj.AssemblyReference.cache
 D:\Epam\northwind-ap\module05\WebApp\Northwind.EntityFramework\obj\Debug\net5.0\Northwind.EntityFramework.GeneratedMSBuildEditorConfig.editorconfig
@@ -13,3 +12,4 @@ D:\Epam\northwind-ap\module05\WebApp\Northwind.EntityFramework\obj\Debug\net5.0\
 D:\Epam\northwind-ap\module05\WebApp\Northwind.EntityFramework\obj\Debug\net5.0\ref\Northwind.EntityFramework.dll
 D:\Epam\northwind-ap\module05\WebApp\Northwind.EntityFramework\obj\Debug\net5.0\Northwind.EntityFramework.pdb
 D:\Epam\northwind-ap\module05\WebApp\Northwind.EntityFramework\obj\Debug\net5.0\Northwind.EntityFramework.genruntimeconfig.cache
+D:\Epam\northwind-ap\module05\WebApp\Northwind.EntityFramework\obj\Debug\net5.0\refint\Northwind.EntityFramework.dll

@@ -60,9 +60,17 @@ namespace WebApp6.Controllers
         [Authorize(Roles = "Employee")]
         public async Task<ActionResult> Create()
         {
+            List<ProductCategory> result = new List<ProductCategory>();
+            await foreach (var category in this.CategoryManagementService.GetAllCategoriesAsync())
+            {
+                result.Add(category);
+            }
+
+            result = result.Distinct(new ProductCategoriesComparer()).ToList();
+
             ProductViewModel productViewModel = new ProductViewModel
             {
-                Categories = await GetSelectListItems(this.CategoryManagementService.GetAllCategoriesAsync()),
+                Categories = await GetSelectListItems(result),
             };
 
 
@@ -87,10 +95,23 @@ namespace WebApp6.Controllers
         [Authorize(Roles = "Employee")]
         public async Task<ActionResult> Edit(int id)
         {
-            var (result, product) = await this.ProductManagementService.TryGetProductAsync(id);
-            if (result)
+            var (isExist, product) = await this.ProductManagementService.TryGetProductAsync(id);
+            if (isExist)
             {
-                return View(this.mapper.Map<EmployeeViewModel>(product));
+                List<ProductCategory> result = new List<ProductCategory>();
+                await foreach (var category in this.CategoryManagementService.GetAllCategoriesAsync())
+                {
+                    result.Add(category);
+                }
+
+                result = result.Distinct(new ProductCategoriesComparer()).ToList();
+
+                ProductViewModel productViewModel = this.mapper.Map<ProductViewModel>(product);
+
+                productViewModel.Categories = await GetSelectListItems(result);
+
+
+                return View(productViewModel);
             }
 
             return this.BadRequest();
@@ -141,26 +162,27 @@ namespace WebApp6.Controllers
 
         }
 
-        private async Task<IEnumerable<SelectListItem>> GetSelectListItems(IAsyncEnumerable<ProductCategory> elements)
-
-        {
-            // Create an empty list to hold result of the operation
-            var selectList = new List<SelectListItem>();
-
-            // For each string in the 'elements' variable, create a new SelectListItem object
-            // that has both its Value and Text properties set to a particular value.
-            // This will result in MVC rendering each item as:
-            //     <option value="State Name">State Name</option>
-            await foreach (var element in elements)
+        private static Task<IEnumerable<SelectListItem>> GetSelectListItems(IEnumerable<ProductCategory> elements)
+            => Task.Run(
+            () =>
             {
-                selectList.Add(new SelectListItem
-                {
-                    Value = element.CategoryId.ToString(),
-                    Text = element.CategoryName
-                });
-            }
+                var selectList = new List<SelectListItem>();
 
-            return selectList;
-        }
+                // For each string in the 'elements' variable, create a new SelectListItem object
+                // that has both its Value and Text properties set to a particular value.
+                // This will result in MVC rendering each item as:
+                //     <option value="State Name">State Name</option>
+                foreach (var element in elements)
+                {
+
+                    selectList.Add(new SelectListItem
+                    {
+                        Value = element.CategoryId.ToString(),
+                        Text = element.CategoryName
+                    });
+                }
+
+                return selectList.GroupBy(x => x.Value).Select(x => x.First());
+            });
     }
 }

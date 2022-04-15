@@ -5,7 +5,6 @@ D:\Epam\northwind-ap\module05\WebApp\WebApp6\bin\Debug\net5.0\WebApp6.deps.json
 D:\Epam\northwind-ap\module05\WebApp\WebApp6\bin\Debug\net5.0\WebApp6.runtimeconfig.json
 D:\Epam\northwind-ap\module05\WebApp\WebApp6\bin\Debug\net5.0\WebApp6.runtimeconfig.dev.json
 D:\Epam\northwind-ap\module05\WebApp\WebApp6\bin\Debug\net5.0\WebApp6.dll
-D:\Epam\northwind-ap\module05\WebApp\WebApp6\bin\Debug\net5.0\ref\WebApp6.dll
 D:\Epam\northwind-ap\module05\WebApp\WebApp6\bin\Debug\net5.0\WebApp6.pdb
 D:\Epam\northwind-ap\module05\WebApp\WebApp6\bin\Debug\net5.0\WebApp6.Views.dll
 D:\Epam\northwind-ap\module05\WebApp\WebApp6\bin\Debug\net5.0\WebApp6.Views.pdb
@@ -189,3 +188,15 @@ D:\Epam\northwind-ap\module05\WebApp\WebApp6\obj\Debug\net5.0\Razor\Views\Shared
 D:\Epam\northwind-ap\module05\WebApp\WebApp6\obj\Debug\net5.0\Razor\Views\Product\Details.cshtml.g.cs
 D:\Epam\northwind-ap\module05\WebApp\WebApp6\obj\Debug\net5.0\Razor\Views\Product\Create.cshtml.g.cs
 D:\Epam\northwind-ap\module05\WebApp\WebApp6\obj\Debug\net5.0\Razor\Views\Shared\Components\NavigationMenu\Default.cshtml.g.cs
+D:\Epam\northwind-ap\module05\WebApp\WebApp6\obj\Debug\net5.0\Razor\Views\Articles\GetAll.cshtml.g.cs
+D:\Epam\northwind-ap\module05\WebApp\WebApp6\obj\Debug\net5.0\Razor\Views\Articles\Details.cshtml.g.cs
+D:\Epam\northwind-ap\module05\WebApp\WebApp6\obj\Debug\net5.0\Razor\Views\Articles\GetComments.cshtml.g.cs
+D:\Epam\northwind-ap\module05\WebApp\WebApp6\obj\Debug\net5.0\Razor\Views\Articles\Create.cshtml.g.cs
+D:\Epam\northwind-ap\module05\WebApp\WebApp6\obj\Debug\net5.0\Razor\Views\Articles\Delete.cshtml.g.cs
+D:\Epam\northwind-ap\module05\WebApp\WebApp6\bin\Debug\net5.0\Microsoft.AspNet.Identity.Core.dll
+D:\Epam\northwind-ap\module05\WebApp\WebApp6\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+D:\Epam\northwind-ap\module05\WebApp\WebApp6\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+D:\Epam\northwind-ap\module05\WebApp\WebApp6\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+D:\Epam\northwind-ap\module05\WebApp\WebApp6\bin\Debug\net5.0\Microsoft.Extensions.Identity.Core.dll
+D:\Epam\northwind-ap\module05\WebApp\WebApp6\bin\Debug\net5.0\Microsoft.Extensions.Identity.Stores.dll
+D:\Epam\northwind-ap\module05\WebApp\WebApp6\obj\Debug\net5.0\refint\WebApp6.dll

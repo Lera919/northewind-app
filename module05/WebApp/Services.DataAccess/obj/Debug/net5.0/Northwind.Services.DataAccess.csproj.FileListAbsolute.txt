@@ -1,6 +1,5 @@
 D:\Epam\northwind-ap\module05\WebApp\Services.DataAccess\bin\Debug\net5.0\Northwind.Services.DataAccess.deps.json
 D:\Epam\northwind-ap\module05\WebApp\Services.DataAccess\bin\Debug\net5.0\Northwind.Services.DataAccess.dll
-D:\Epam\northwind-ap\module05\WebApp\Services.DataAccess\bin\Debug\net5.0\ref\Northwind.Services.DataAccess.dll
 D:\Epam\northwind-ap\module05\WebApp\Services.DataAccess\bin\Debug\net5.0\Northwind.Services.DataAccess.pdb
 D:\Epam\northwind-ap\module05\WebApp\Services.DataAccess\bin\Debug\net5.0\Northwind.DataAccess.dll
 D:\Epam\northwind-ap\module05\WebApp\Services.DataAccess\bin\Debug\net5.0\Northwind.EntityFramework.dll
@@ -17,3 +16,4 @@ D:\Epam\northwind-ap\module05\WebApp\Services.DataAccess\obj\Debug\net5.0\Northw
 D:\Epam\northwind-ap\module05\WebApp\Services.DataAccess\obj\Debug\net5.0\Northwind.Services.DataAccess.dll
 D:\Epam\northwind-ap\module05\WebApp\Services.DataAccess\obj\Debug\net5.0\ref\Northwind.Services.DataAccess.dll
 D:\Epam\northwind-ap\module05\WebApp\Services.DataAccess\obj\Debug\net5.0\Northwind.Services.DataAccess.pdb
+D:\Epam\northwind-ap\module05\WebApp\Services.DataAccess\obj\Debug\net5.0\refint\Northwind.Services.DataAccess.dll

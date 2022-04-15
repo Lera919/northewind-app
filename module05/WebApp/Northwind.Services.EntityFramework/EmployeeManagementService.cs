@@ -12,6 +12,7 @@ namespace Northwind.Services.Employees
     using Bogus;
     using Microsoft.EntityFrameworkCore;
     using Northwind.DataAccess;
+    using Northwind.Services;
     using Northwind.Services.EntityFrameworkCore.Blogging;
     using WebAppModule6.Context;
     using WebAppModule6.Entities;
@@ -40,9 +41,10 @@ namespace Northwind.Services.Employees
         /// <inheritdoc/>
         public async Task<int> CreateEmployeeAsync(Employee employee)
         {
-            this.context.Employees.Add(this.mapper.Map<EmployeeEntity>(employee));
-            int rowsAffected = await this.context.SaveChangesAsync().ConfigureAwait(false);
-            return rowsAffected;
+            var createdEmployee = this.context.Employees.Add(this.mapper.Map<EmployeeEntity>(employee)).Entity;
+            await this.context.SaveChangesAsync().ConfigureAwait(false);
+            var createdEmployeeid = createdEmployee.EmployeeId;
+            return createdEmployeeid;
         }
 
         /// <inheritdoc/>
@@ -80,6 +82,13 @@ namespace Northwind.Services.Employees
                 yield return this.mapper.Map<Employee>(employee);
             }
         }
+
+        public async Task<(bool, Employee)> TryGetByNameAsync(string name)
+        {
+            var employee = this.mapper.Map<Employee>(this.context.Employees.SingleOrDefault(x => x.FirstName == name));
+            return (employee is not null, employee);
+        }
+
 
         /// <inheritdoc/>
         public async Task<(bool result, Employee employee)> TryGetEmployeeAsync(int employeeId)

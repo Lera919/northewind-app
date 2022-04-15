@@ -55,7 +55,7 @@ namespace WebAppModule6.Entities
 
         [ForeignKey(nameof(CustomerId))]
         [InverseProperty("Orders")]
-        public virtual Customer Customer { get; set; }
+        public virtual CustomerEntity Customer { get; set; }
         [ForeignKey(nameof(EmployeeId))]
         [InverseProperty("Orders")]
         public virtual EmployeeEntity Employee { get; set; }

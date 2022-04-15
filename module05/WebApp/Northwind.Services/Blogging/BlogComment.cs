@@ -13,7 +13,7 @@ namespace Northwind.Services.Blogging
         public int ArticleId { get; set; }
 
         public string CustomerId { get; set; }
-        public string AuthorName { get; set; }
+        public string CommentAuthorName { get; set; }
 
         public string ArticleName { get; set; }
 

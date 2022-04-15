@@ -5,21 +5,29 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Northwind.Authentication.Context;
 using Northwind.Authentication.Models;
+using Northwind.Services;
+using Northwind.Services.Employees;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using WebApp6.Models;
+using WebAppModule6.Context;
+using WebAppModule6.Entities;
 
 namespace WebApp6.Controllers
 {
     public class AccountController : Controller
     {
-        private NorthwindUsersContext context;
-        public AccountController(NorthwindUsersContext context)
+        private readonly NorthwindUsersContext context;
+        private readonly IEmployeeManagementService employeeManagmentService;
+        private readonly ICustomerManagmentService customerManagmentService;
+        public AccountController(NorthwindUsersContext context, IEmployeeManagementService employeeManagmentService, ICustomerManagmentService customerManagmentService)
         {
+            this.customerManagmentService = customerManagmentService;
             this.context = context;
+            this.employeeManagmentService = employeeManagmentService;
         }
 
         [HttpGet]
@@ -40,17 +48,25 @@ namespace WebApp6.Controllers
             if (ModelState.IsValid)
             {
                 User user = await context.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
-
+                string identifier = model.Email.Substring(0, model.Email.LastIndexOf('@'));
                 if (user is null)
                 {
+                    
+                    Role userRole = await context.Roles.FirstOrDefaultAsync(r => r.Id.ToString() == model.Role);
+                    
+                    var (isFound, northeindUserId) = await TryGetNorthwindId(identifier, userRole.Name);
+                    if (!isFound)
+                    {
+                        northeindUserId = await CreateNewNorthwindUser(identifier, userRole.Name);
+                    }
                     user = new User
                     {
                         Email = model.Email,
-                        //Password = model.Password,
                         Password = BCrypt.Net.BCrypt.HashPassword(model.Password),
+                        NorthwindId = northeindUserId.Trim(),
                     };
 
-                    Role userRole = await context.Roles.FirstOrDefaultAsync(r => r.Id.ToString() == model.Role);
+
 
                     if (userRole != null)
                     {
@@ -113,6 +129,7 @@ namespace WebApp6.Controllers
             {
                 new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email),
                 new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role.Name),
+                // new Claim("NorthwindId", user.NorthwindId)
             };
 
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
@@ -139,6 +156,47 @@ namespace WebApp6.Controllers
             }
 
             return selectList;
+        }
+
+        private async Task<string> CreateNewNorthwindUser(string identifier, string role)
+        {
+            string northwindId;
+            if (role.Equals("Employee", StringComparison.InvariantCultureIgnoreCase))
+            {
+                northwindId =  (await this.employeeManagmentService.CreateEmployeeAsync(new Employee
+                {
+                    FirstName = identifier,
+                    LastName = "",
+                }
+                    )).ToString();
+            }
+            else
+            {
+                northwindId = await (this.customerManagmentService.CreateCustomerAsync(new Customer
+                {
+                    CustomerId = new Bogus.Randomizer().String(5).ToUpperInvariant(),
+                   ContactName = identifier,
+                   CompanyName = "",
+                }
+                    ));
+            }
+          return northwindId;
+
+        }
+
+        private async Task<(bool result, string id)> TryGetNorthwindId (string identifier, string role)
+        {
+            if (role.Equals("Employee", StringComparison.InvariantCultureIgnoreCase))
+            {
+                var (_, user) = await this.employeeManagmentService.TryGetByNameAsync(identifier);
+                return user is null ? (false, null) : (true, user.EmployeeId.ToString());
+            }
+            else
+            {
+                var (_, user) = await this.customerManagmentService.TryGetCustomerAsync(identifier);
+                return user is null ? (false, null) : (true, user.CustomerId);
+            }
+
         }
     }
 }

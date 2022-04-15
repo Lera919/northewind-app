@@ -21,7 +21,7 @@ namespace Northwind.Authentication
 
             var builder = new DbContextOptionsBuilder<NorthwindUsersContext>();
 
-            var connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=NorthwindBlogging;Integrated Security=True";
+            var connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=Users;Integrated Security=True";
 
             builder.UseSqlServer(connectionString);
 

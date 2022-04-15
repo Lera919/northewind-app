@@ -1,196 +1,278 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Northwind.Authentication.Context;
+using Northwind.Services;
 using Northwind.Services.Blogging;
 using Northwind.Services.Employees;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net.Mime;
-using System.Text;
 using System.Threading.Tasks;
-using WebAppModule6.Entities;
+using WebApp6.Models;
 
 namespace WebApp6.Controllers
 {
-    [ApiController]
-    [ApiConventionType(typeof(DefaultApiConventions))]
-    [Produces(MediaTypeNames.Application.Json)]
-    [Route("api/[controller]")]
     public class ArticlesController : Controller
     {
-        public ArticlesController(IBloggingService managementService, IEmployeeManagementService employeeManagementService)
+        private readonly IMapper mapper;
+        public ArticlesController(IBloggingService managementService, 
+            IEmployeeManagementService employeeManagementService,
+            ICustomerManagmentService customerManagmentService,
+            NorthwindUsersContext context, IMapper mapper)
         {
             this.ArticleManagementService = managementService;
             this.EmployeeManagementService = employeeManagementService;
+            this.mapper = mapper;
+            this.UserContext = context;
+            this.CustomerManagmentService = customerManagmentService;
         }
-
         IBloggingService ArticleManagementService { get; set; }
+        NorthwindUsersContext UserContext { get; set; }
 
         IEmployeeManagementService EmployeeManagementService { get; set; }
 
+        ICustomerManagmentService CustomerManagmentService { get; set; }
+
+        // GET: ArticlesController
+        public async Task<ActionResult> GetAll(int page = 1)
+        {
+            List<ArticleViewModel> result = new List<ArticleViewModel>();
+            var offset = PagingInfo.ItemsPerPage * (page - 1);
+            await foreach (var article in this.ArticleManagementService.GetArticleAsync(offset, PagingInfo.ItemsPerPage))
+            {
+                result.Add(this.mapper.Map<ArticleViewModel>(article));
+
+            }
+            var pagingInfo = new PagingInfo
+            {
+                TotalItems = result.Count,
+                CurrentPage = offset / PagingInfo.ItemsPerPage,
+            };
+
+            var user = this.UserContext.Users.SingleOrDefault(x => x.Email == this.User.Identity.Name);
+            ViewBag.NorthwindId = user is null ? null : user.NorthwindId;
+            return View(new PaginationArticleViewModel { Collection = result, PagingInfo = pagingInfo });
+
+        }
+        // GET: ArticlesController/Details/5
+        public async Task< ActionResult> Details(int id)
+        {
+            (bool operation, BlogArticle article) = await this.ArticleManagementService.TryGetArticleAsync(id);
+
+            if (!operation)
+            {
+                return this.NotFound();
+            }
+
+            return View(this.mapper.Map<ArticleViewModel>(article));
+        }
+
+        // GET: ArticlesController/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: ArticlesController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Create([Bind] BlogArticle article)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = this.UserContext.Users.SingleOrDefault(x => x.Email == this.User.Identity.Name);
+                var id = user is null ? 0 : int.Parse(user.NorthwindId);
+                var (result, employee) = await this.EmployeeManagementService.TryGetEmployeeAsync(id);
+                if (result)
+                {
+                    article.Author = employee;   
+                }
+                else
+                {
+                    return this.BadRequest();
+                }
+                await this.ArticleManagementService.CreateBlogArticleAsync(article);
+                return RedirectToAction(nameof(GetAll));
+            }
+            return View(this.mapper.Map<ArticleViewModel>(article));
+        }
+
+        // GET: ArticlesController/Edit/5
+        [Authorize(Roles = "Employee")]
+        public async Task<ActionResult> Edit(int id)
+        {
+            var (result, article) = await this.ArticleManagementService.TryGetArticleAsync(id);
+            if (result)
+            {
+                return View(this.mapper.Map<ArticleViewModel>(article));
+            }
+
+            return this.BadRequest();
+
+        }
+
+        // POST: Test/Edit/5
         [Authorize(Roles = "Employee")]
         [HttpPost]
-        public async Task<IActionResult> Create(BlogArticle article)
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(int articleId, [Bind] BlogArticle article)
         {
-            var (employeeExist, _) = await this.EmployeeManagementService.TryGetEmployeeAsync(article.AuthorId);
-            if (!employeeExist)
+            if (articleId != article.ArticleId)
             {
-                return this.BadRequest();
+                this.BadRequest();
             }
 
-            var res = await this.ArticleManagementService.CreateBlogArticleAsync(article);
-
-            article.ArticleId = res;
-            return this.CreatedAtAction(nameof(Create), new { id = res }, article);
+            if (ModelState.IsValid)
+            {
+                await this.ArticleManagementService.UpdateArticleAsync(articleId, article);
+                return RedirectToAction(nameof(GetAll));
+            }
+            return View(this.mapper.Map<ArticleViewModel>(article));
         }
 
-        [Authorize(Roles = "Employee")]
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, ArticleRequestForm updateForm)
+
+
+        // GET: ArticlesController/Delete/5
+        public async Task< ActionResult> Delete(int id)
         {
-            var (articleExist, _) = await this.ArticleManagementService.TryGetArticleAsync(id);
-            if (!articleExist)
+            var (res, article) = await this.ArticleManagementService.TryGetArticleAsync(id);
+            return res ? View(this.mapper.Map<ArticleViewModel>(article)) : this.NotFound();
+        }
+
+        // POST: ArticlesController/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Employee")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int articleId)
+        {
+            var res =  await this.ArticleManagementService.DestroyArticleAsync(articleId);
+            if (res)
+            {
+                return RedirectToAction(nameof(GetAll));
+            }
+            else
             {
                 return this.NotFound();
             }
 
-            var updated = await this.ArticleManagementService.UpdateArticleAsync(id, updateForm);
-            return updated ? this.Ok() : this.NotFound();
         }
 
-        [Authorize(Roles = "Employee")]
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        [HttpGet("{articleId}/comments")]
+        public async Task<ActionResult> GetComments(int articleId, int page = 1)
         {
-            var (articleExist, _) = await this.ArticleManagementService.TryGetArticleAsync(id);
-            if (!articleExist)
-            {
-                return this.NotFound();
-            }
+            var offset = (page - 1) * PagingInfo.ItemsPerPage;
+            var comments = this.ArticleManagementService.GetArticalComments(articleId, offset, PagingInfo.ItemsPerPage);
 
-            var deleted = await this.ArticleManagementService.DestroyArticleAsync(id);
-            return deleted ? this.Ok() : this.NotFound();
-        }
-
-        [HttpGet]
-        [HttpGet("{limit}/{offset}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BlogArticalFullInformationForm))]
-        public async IAsyncEnumerable<BlogArticalFullInformationForm> GetAll(int offset = 0, int limit = 10)
-        {
-            await foreach (var article in this.ArticleManagementService.GetArticleAsync(offset, limit))
-            {
-                yield return article;
-            }
-        }
-
-        [HttpGet("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BlogArticle))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetById(int id)
-        {
-            var (articleExist, article) = await this.ArticleManagementService.TryGetArticleAsync(id);
-            return articleExist ? this.Ok(article) : this.NotFound();
-
-        }
-
-        [HttpGet("{id}/products")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BlogArticle))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async IAsyncEnumerable<ProductEntity> GetByArticleIdAllProducts(int id)
-        {
-            var products = this.ArticleManagementService.GetArticleProductsAsync(id);
-
-            await foreach (var product in products)
-            {
-                yield return product;
-            }
-        }
-
-        [Authorize(Roles = "Employee")]
-        [HttpPost("{articleId}/products/{id}")]
-        public async Task<IActionResult> AddProductsToArticle(int articleId, int id)
-        {
-            var result = await this.ArticleManagementService.AddLinkToArticleForProduct(articleId, id);
-            if (!result)
-            {
-                return this.BadRequest();
-            }
-
-            return this.Ok();
-        }
-
-        [Authorize(Roles = "Employee")]
-        [HttpDelete("{articleId}/products/{id}")]
-        public async Task<IActionResult> RemoveProductFromArticle(int articleId, int id)
-        {
-            var result = await this.ArticleManagementService.RemoveProductFromArticle(articleId, id);
-            if (!result)
-            {
-                return this.BadRequest();
-            }
-
-            return this.Ok();
-        }
-
-        [HttpGet("{id}/comments")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BlogComment))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async IAsyncEnumerable<BlogComment> GetByArticleIdAllComments(int id)
-        {
-            var comments = this.ArticleManagementService.GetArticalComments(id);
-
+            var result = new List<BlogCommentViewModel>();
             await foreach (var comment in comments)
             {
-                yield return comment;
+                result.Add(this.mapper.Map< BlogCommentViewModel >( comment));
             }
+
+            var pagingInfo = new PagingInfo
+            {
+                TotalItems = result.Count,
+                CurrentPage = page,
+            };
+
+            var user = this.UserContext.Users.SingleOrDefault(x => x.Email == this.User.Identity.Name);
+            ViewBag.NorthwindId = user is null ? null : user.NorthwindId;
+            return View(new PaginationBlogCommentViewModel { Collection = result, PagingInfo = pagingInfo, ArticleId = articleId }); ;
         }
 
-        [HttpPost("{articleId}/comments")]
-        public async Task<IActionResult> AddCommentToArticle(int articleId, CommentRequestForm comment)
+        public async Task<ActionResult> DeleteComment(int commentId)
         {
-            var result = await this.ArticleManagementService.AddComment(articleId, comment);
-            if (!result)
-            {
-                return this.BadRequest();
-            }
-
-            return this.Ok();
+            var (res, article) = await this.ArticleManagementService.TryGetCommentAsync(commentId);
+            return res ? View(this.mapper.Map<BlogCommentViewModel>(article)) : this.NotFound();
         }
 
-        [HttpPut("{articleId}/comments/{commentId}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> UpdateComment(int articleId, int commentId)
+        // POST: ArticlesController/Delete/5
+        [HttpPost, ActionName("DeleteComment")]
+        [Authorize(Roles = "Customer")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteCommentConfirmed(int articleId, int commentId)
         {
-            using StreamReader reader = new StreamReader(Request.Body, Encoding.UTF8);
-
-            var text = await reader.ReadToEndAsync();
-
-
-
-            if (text is null)
+            var res = await this.ArticleManagementService.RemoveComment(articleId, commentId);
+            if (res)
             {
-                this.BadRequest(text);
+                return RedirectToAction(nameof(GetAll));
+            }
+            else
+            {
+                return this.NotFound();
             }
 
-            var result = await this.ArticleManagementService.UpdateComment(articleId, commentId, text);
-
-            return result ? this.Ok() : this.NotFound();
         }
 
-        [HttpDelete("{articleId}/comments/{commentId}")]
-        public async Task<IActionResult> RemoveCommentFromArticle(int articleId, int commentId)
+        // GET: ArticlesController/Edit/5
+        [Authorize(Roles = "Customer")]
+        public async Task<ActionResult> EditComment(int id)
         {
-            var result = await this.ArticleManagementService.RemoveComment(articleId, commentId);
-            if (!result)
+            var (result, article) = await this.ArticleManagementService.TryGetCommentAsync(id);
+            if (result)
             {
-                return this.BadRequest();
+                return View(this.mapper.Map<BlogCommentViewModel>(article));
             }
 
-            return this.Ok();
+            return this.BadRequest();
+
+        }
+
+        // POST: Test/Edit/5
+        [Authorize(Roles = "Customer")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditComment(int articleId, [Bind] BlogComment comment)
+        {
+            if (articleId != comment.ArticleId)
+            {
+                this.BadRequest();
+            }
+
+            if (ModelState.IsValid)
+            {
+                await this.ArticleManagementService.UpdateComment(articleId, comment.CommentId, comment.Text);
+                return RedirectToAction(nameof(GetAll));
+            }
+            return View(this.mapper.Map<BlogCommentViewModel>(comment));
+        }
+
+
+        // GET: ArticlesController/CreateComment
+        public ActionResult CreateComment(int articleId)
+        {
+            BlogCommentViewModel model = new()
+            {
+                ArticleId = articleId,
+            };
+            return View(model);
+        }
+
+        // POST: ArticlesController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CreateComment([Bind] BlogComment comment)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = this.UserContext.Users.SingleOrDefault(x => x.Email == this.User.Identity.Name);
+                var id = user is null ? "" : user.NorthwindId;
+                var (result, customer) = await this.CustomerManagmentService.TryGetCustomerAsync(id);
+                if (result)
+                {
+                    comment.CustomerId = customer.CustomerId;
+                    comment.CommentAuthorName = customer.ContactName;
+                }
+                else
+                {
+                    return this.BadRequest();
+                }
+                await this.ArticleManagementService.AddComment(comment);
+                return RedirectToAction(nameof(GetAll));
+            }
+            return View(this.mapper.Map<ArticleViewModel>(comment));
         }
     }
 }

@@ -52,5 +52,7 @@ namespace Northwind.Services.Employees
         /// <param name="employee">A <see cref="EmployeeEntity"/>.</param>
         /// <returns>True if a product category is updated; otherwise false.</returns>
         Task<bool> UpdateEmployeeAsync(int employeeId, Employee employee);
+
+        Task<(bool, Employee)> TryGetByNameAsync(string name);
     }
 }

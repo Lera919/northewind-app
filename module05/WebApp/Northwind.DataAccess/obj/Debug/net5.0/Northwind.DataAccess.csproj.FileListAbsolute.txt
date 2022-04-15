@@ -1,6 +1,5 @@
 D:\Epam\northwind-ap\module05\WebApp\Northwind.DataAccess\bin\Debug\net5.0\Northwind.DataAccess.deps.json
 D:\Epam\northwind-ap\module05\WebApp\Northwind.DataAccess\bin\Debug\net5.0\Northwind.DataAccess.dll
-D:\Epam\northwind-ap\module05\WebApp\Northwind.DataAccess\bin\Debug\net5.0\ref\Northwind.DataAccess.dll
 D:\Epam\northwind-ap\module05\WebApp\Northwind.DataAccess\bin\Debug\net5.0\Northwind.DataAccess.pdb
 D:\Epam\northwind-ap\module05\WebApp\Northwind.DataAccess\obj\Debug\net5.0\Northwind.DataAccess.csproj.AssemblyReference.cache
 D:\Epam\northwind-ap\module05\WebApp\Northwind.DataAccess\obj\Debug\net5.0\Northwind.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
@@ -10,3 +9,4 @@ D:\Epam\northwind-ap\module05\WebApp\Northwind.DataAccess\obj\Debug\net5.0\North
 D:\Epam\northwind-ap\module05\WebApp\Northwind.DataAccess\obj\Debug\net5.0\Northwind.DataAccess.dll
 D:\Epam\northwind-ap\module05\WebApp\Northwind.DataAccess\obj\Debug\net5.0\ref\Northwind.DataAccess.dll
 D:\Epam\northwind-ap\module05\WebApp\Northwind.DataAccess\obj\Debug\net5.0\Northwind.DataAccess.pdb
+D:\Epam\northwind-ap\module05\WebApp\Northwind.DataAccess\obj\Debug\net5.0\refint\Northwind.DataAccess.dll

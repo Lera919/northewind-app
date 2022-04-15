@@ -22,7 +22,7 @@ namespace WebAppModule6.Entities
 
         [ForeignKey(nameof(CustomerId))]
         [InverseProperty("CustomerCustomerDemos")]
-        public virtual Customer Customer { get; set; }
+        public virtual CustomerEntity Customer { get; set; }
         [ForeignKey(nameof(CustomerTypeId))]
         [InverseProperty(nameof(CustomerDemographic.CustomerCustomerDemos))]
         public virtual CustomerDemographic CustomerType { get; set; }

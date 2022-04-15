@@ -9,11 +9,17 @@ namespace Northwind.Services.Blogging
 {
     public interface IBloggingService
     {
+        //Task<string> GetCommentAuthorId
         Task<bool> RemoveComment(int articleId, int commentId);
         Task<bool> UpdateComment(int articleId, int commentId, string text);
-        Task<bool> AddComment(int articleId, CommentRequestForm comment);
-        IAsyncEnumerable<BlogComment> GetArticalComments(int articleId);
-
+        Task<bool> AddComment(BlogComment comment);
+        IAsyncEnumerable<BlogComment> GetArticalComments(int articleId, int offset, int limit);
+        /// <summary>
+        /// Try to show an article with specified identifier.
+        /// </summary>
+        /// <param name="articleId">An article identifier.</param>
+        /// <returns>Returns true if an article is returned; otherwise false.</returns>
+        Task<(bool result, BlogComment comment)> TryGetCommentAsync(int commentId);
         Task<bool> RemoveProductFromArticle(int articleId, int productId);
 
         Task<bool> AddLinkToArticleForProduct(int articleId, int productId);
@@ -26,7 +32,7 @@ namespace Northwind.Services.Blogging
         /// <param name="offset">An offset of the first element to return.</param>
         /// <param name="limit">A limit of elements to return.</param>
         /// <returns>A <see cref="IList{T}"/> of <see cref="BlogArticle"/>.</returns>
-        IAsyncEnumerable<BlogArticalFullInformationForm> GetArticleAsync(int offset, int limit);
+        IAsyncEnumerable<BlogArticle> GetArticleAsync(int offset, int limit);
 
         /// <summary>
         /// Creates a new BlogArticle.
@@ -40,7 +46,7 @@ namespace Northwind.Services.Blogging
         /// </summary>
         /// <param name="articleId">An article identifier.</param>
         /// <returns>Returns true if an article is returned; otherwise false.</returns>
-        Task<(bool result, BlogArticalFullInformationForm article)> TryGetArticleAsync(int articleId);
+        Task<(bool result, BlogArticle article)> TryGetArticleAsync(int articleId);
 
         /// <summary>
         /// Destroys an existed article.
@@ -55,6 +61,6 @@ namespace Northwind.Services.Blogging
         /// <param name="id">An article identifier.</param>
         /// <param name="article">A <see cref="BlogArticle"/>.</param>
         /// <returns>True if an article is updated; otherwise false.</returns>
-        Task<bool> UpdateArticleAsync(int id, ArticleRequestForm newInfo);
+        Task<bool> UpdateArticleAsync(int id, BlogArticle newInfo);
     }
 }

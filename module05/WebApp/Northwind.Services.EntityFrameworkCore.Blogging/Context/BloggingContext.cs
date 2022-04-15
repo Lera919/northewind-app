@@ -35,6 +35,7 @@ namespace Northwind.Services.EntityFrameworkCore.Blogging
             modelBuilder.Entity<BlogArticleEntity>().HasMany(u => u.Products);
             modelBuilder.Entity<BlogArticleEntity>().HasMany(u => u.Comments);
             modelBuilder.Entity<BlogCommentEntity>().HasKey(u => u.CommentId);
+            modelBuilder.Entity<BlogCommentEntity>().HasOne(u => u.Article).WithMany(u=> u.Comments).OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<BlogCommentEntity>().Property(u => u.Text).HasColumnType("ntext");
             modelBuilder.Entity<BlogProductEntity>().HasKey(p => new { p.ProductId, p.ArticleId });
             modelBuilder.Ignore<CustomerCustomerDemo>();

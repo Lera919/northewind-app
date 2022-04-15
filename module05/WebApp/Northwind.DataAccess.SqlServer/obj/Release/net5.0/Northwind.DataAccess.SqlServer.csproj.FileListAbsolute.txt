@@ -1,0 +1,15 @@
+D:\Epam\northwind-ap\module05\WebApp\Northwind.DataAccess.SqlServer\bin\Release\net5.0\Northwind.DataAccess.SqlServer.deps.json
+D:\Epam\northwind-ap\module05\WebApp\Northwind.DataAccess.SqlServer\bin\Release\net5.0\Northwind.DataAccess.SqlServer.dll
+D:\Epam\northwind-ap\module05\WebApp\Northwind.DataAccess.SqlServer\bin\Release\net5.0\ref\Northwind.DataAccess.SqlServer.dll
+D:\Epam\northwind-ap\module05\WebApp\Northwind.DataAccess.SqlServer\bin\Release\net5.0\Northwind.DataAccess.SqlServer.pdb
+D:\Epam\northwind-ap\module05\WebApp\Northwind.DataAccess.SqlServer\bin\Release\net5.0\Northwind.DataAccess.dll
+D:\Epam\northwind-ap\module05\WebApp\Northwind.DataAccess.SqlServer\bin\Release\net5.0\Northwind.DataAccess.pdb
+D:\Epam\northwind-ap\module05\WebApp\Northwind.DataAccess.SqlServer\obj\Release\net5.0\Northwind.DataAccess.SqlServer.csproj.AssemblyReference.cache
+D:\Epam\northwind-ap\module05\WebApp\Northwind.DataAccess.SqlServer\obj\Release\net5.0\Northwind.DataAccess.SqlServer.GeneratedMSBuildEditorConfig.editorconfig
+D:\Epam\northwind-ap\module05\WebApp\Northwind.DataAccess.SqlServer\obj\Release\net5.0\Northwind.DataAccess.SqlServer.AssemblyInfoInputs.cache
+D:\Epam\northwind-ap\module05\WebApp\Northwind.DataAccess.SqlServer\obj\Release\net5.0\Northwind.DataAccess.SqlServer.AssemblyInfo.cs
+D:\Epam\northwind-ap\module05\WebApp\Northwind.DataAccess.SqlServer\obj\Release\net5.0\Northwind.DataAccess.SqlServer.csproj.CoreCompileInputs.cache
+D:\Epam\northwind-ap\module05\WebApp\Northwind.DataAccess.SqlServer\obj\Release\net5.0\Northwind.DataAccess.SqlServer.csproj.CopyComplete
+D:\Epam\northwind-ap\module05\WebApp\Northwind.DataAccess.SqlServer\obj\Release\net5.0\Northwind.DataAccess.SqlServer.dll
+D:\Epam\northwind-ap\module05\WebApp\Northwind.DataAccess.SqlServer\obj\Release\net5.0\ref\Northwind.DataAccess.SqlServer.dll
+D:\Epam\northwind-ap\module05\WebApp\Northwind.DataAccess.SqlServer\obj\Release\net5.0\Northwind.DataAccess.SqlServer.pdb

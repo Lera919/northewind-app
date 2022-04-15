@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +13,7 @@ using Northwind.DataAccess;
 using Northwind.Services;
 using Northwind.Services.Blogging;
 using Northwind.Services.Employees;
+using Northwind.Services.EntityFramework;
 using Northwind.Services.EntityFrameworkCore;
 using Northwind.Services.EntityFrameworkCore.Blogging;
 using Northwind.Services.Products;
@@ -19,6 +21,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApp6.ApplicationUser;
 using WebAppModule6.Context;
 
 namespace WebApp6
@@ -35,6 +38,9 @@ namespace WebApp6
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+           // services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
+            //services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>().AddDefaultTokenProviders();
+
             services.AddControllersWithViews();
             services.AddScoped<MemoryDataCreator>();
             services.AddDbContext<NorthwindUsersContext>
@@ -46,12 +52,21 @@ namespace WebApp6
                 {
                     options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
                 });
+
+            //services.AddAuthorization(opts => {
+                
+            //    opts.AddPolicy("NorthwindId", policy => {
+            //        policy.RequireClaim("NorthwindId");
+            //    });
+            //});
+
             services.AddDbContext<NorthwindContext>(opt =>
                  opt.UseSqlServer("data source=(localdb)\\MSSQLLocalDB;Integrated Security=True;Database=Northwind;"));
             services.AddScoped<IMapper>(mapper => new MapperConfiguration
             (m => { m.AddProfile(new MappingProfiler()); }).CreateMapper());
             services.AddScoped<NorthwindDataAccessFactory>(factory => new SqlServerDataAccessFactory(new System.Data.SqlClient.SqlConnection(this.Configuration.GetConnectionString("connection"))));
             services.AddScoped<IProductManagementService, ProductManagementService>();
+            services.AddScoped<ICustomerManagmentService, CustomerManagmentService>();
             services.AddScoped<IProductsCategoryManagmentService, ProductCategoriesManagmentService>();
             services.AddScoped<IProductPictureManagementService, PictureManagmentService>();
             services.AddScoped<IPhotoManagamentService, PhotoManagmentService>();

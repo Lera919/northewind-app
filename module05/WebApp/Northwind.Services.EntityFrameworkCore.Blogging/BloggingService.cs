@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Northwind.Services.Blogging;
+using Northwind.Services.Employees;
 using Northwind.Services.EntityFrameworkCore.Blogging.Entities;
 using WebAppModule6.Context;
 using WebAppModule6.Entities;
@@ -32,7 +33,7 @@ namespace Northwind.Services.EntityFrameworkCore.Blogging
         public async Task<int> CreateBlogArticleAsync(BlogArticle article)
         {
             article.PublicationDate = DateTime.Now;
-            var result = await context.Articles.AddAsync(this.mapper.Map<Northwind.Services.EntityFrameworkCore.Blogging.Entities.BlogArticleEntity>(article));
+            var result = await context.Articles.AddAsync(this.mapper.Map<BlogArticleEntity>(article));
             await context.SaveChangesAsync();
             return result.Entity.ArticleId;
         }
@@ -49,7 +50,7 @@ namespace Northwind.Services.EntityFrameworkCore.Blogging
             return result;
         }
 
-        public async Task<(bool result, BlogArticalFullInformationForm article)> TryGetArticleAsync(int articleId)
+        public async Task<(bool result, BlogArticle article)> TryGetArticleAsync(int articleId)
         {
             var article = await this.context.Articles.FindAsync(articleId).ConfigureAwait(false);
             if (article is null)
@@ -57,41 +58,40 @@ namespace Northwind.Services.EntityFrameworkCore.Blogging
                 return (false, null);
             }
 
-            var author = await this.northwindContext.Employees.FindAsync(article.AuthorId).ConfigureAwait(false);
+            var author = this.mapper.Map<Employee>(await this.northwindContext.Employees.FindAsync(article.AuthorId).ConfigureAwait(false));
             if (author is null)
             {
                 return (false, null);
             }
-            var fulInformation = new BlogArticalFullInformationForm
+            var fulInformation = new BlogArticle
             {
                 ArticleId = article.ArticleId,
                 PublicationDate = article.PublicationDate,
                 Text = article.Text,
                 Title = article.Title,
-                AuthorId = author.EmployeeId,
-                AuthorName = author.FirstName,
+                Author = author,
             };
             return (article != null, fulInformation);
         }
 
-        public async IAsyncEnumerable<BlogComment> GetArticalComments(int articleId)
+        public async IAsyncEnumerable<BlogComment> GetArticalComments(int articleId, int offset, int limit)
         {
             var article = this.context.Articles.Include(a => a.Comments).Where(a => a.ArticleId == articleId).Single();
-            var commentsInArticle = article.Comments;
+            var commentsInArticle = article.Comments.Skip(offset).Take(limit);
             var customers = await this.northwindContext.Customers.ToListAsync();
 
-            var result = (from comment in commentsInArticle
-                          from customer in customers
-                          where customer.CustomerId == comment.CustomerId
-                          select comment);
+            //var result = (from comment in commentsInArticle
+            //              from customer in customers
+            //              where customer.CustomerId == comment.CustomerId
+            //              select comment);
 
-            foreach(var comment in result)
+            foreach(var comment in commentsInArticle)
             {
-                var customer = customers.Where(cust => cust.CustomerId == comment.CustomerId).Single();
+                var customer = customers.Where(cust => cust.CustomerId.Trim() == comment.CustomerId).Single();
                 yield return new BlogComment
                 {
                     Text = comment.Text,
-                    AuthorName = customer.ContactName,
+                    CommentAuthorName = customer.ContactName,
                     CommentId = comment.CommentId,
                     ArticleName = article.Title,
                     ArticleId = article.ArticleId,
@@ -102,14 +102,14 @@ namespace Northwind.Services.EntityFrameworkCore.Blogging
 
         }
 
-        public async Task<bool> AddComment (int articleId, CommentRequestForm comment)
+        public async Task<bool> AddComment (BlogComment comment)
         {
             if (comment is null)
             {
                 throw new ArgumentNullException(nameof(comment));
             }
 
-            var article = this.context.Articles.Include(a => a.Comments).Where(a => a.ArticleId == articleId).Single();
+            var article = this.context.Articles.Include(a => a.Comments).Where(a => a.ArticleId == comment.ArticleId).Single();
 
             if (article is null)
             {
@@ -193,7 +193,7 @@ namespace Northwind.Services.EntityFrameworkCore.Blogging
 
             return true;
         }
-        public async Task<bool> UpdateArticleAsync(int id, ArticleRequestForm newInfo)
+        public async Task<bool> UpdateArticleAsync(int id, BlogArticle newInfo)
         {
             if (newInfo is null)
             {
@@ -216,22 +216,21 @@ namespace Northwind.Services.EntityFrameworkCore.Blogging
             }
         }
 
-        public async IAsyncEnumerable<BlogArticalFullInformationForm> GetArticleAsync(int offset, int limit)
+        public async IAsyncEnumerable<BlogArticle> GetArticleAsync(int offset, int limit)
         {
             await foreach (var article in this.context.Articles.OrderBy(article => article.ArticleId).Skip(offset).Take(limit).AsAsyncEnumerable())
             {
-                var author = await this.northwindContext.Employees.FindAsync(article.AuthorId);
+                var author = this.mapper.Map<Employee>(await this.northwindContext.Employees.FindAsync(article.AuthorId));
                 if (author != null)
                 {
 
-                    yield return new BlogArticalFullInformationForm
+                    yield return new BlogArticle
                     {
                         ArticleId = article.ArticleId,
                         PublicationDate = article.PublicationDate,
                         Text = article.Text,
                         Title = article.Title,
-                        AuthorId = author.EmployeeId,
-                        AuthorName = author.FirstName,
+                        Author = author,
                     };
                 }
             }
@@ -274,6 +273,18 @@ namespace Northwind.Services.EntityFrameworkCore.Blogging
             await this.context.SaveChangesAsync();
 
             return true;
+        }
+
+        public async Task<(bool result, BlogComment comment)> TryGetCommentAsync(int commentId)
+        {
+            var comment = await this.context.Comments.FindAsync(commentId).ConfigureAwait(false);
+            if (comment is null)
+            {
+                return (false, null);
+            }
+
+            
+            return (comment != null, this.mapper.Map<BlogComment>(comment));
         }
     }
 }

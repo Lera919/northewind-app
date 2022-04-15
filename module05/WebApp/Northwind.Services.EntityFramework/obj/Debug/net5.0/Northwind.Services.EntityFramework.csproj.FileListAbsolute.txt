@@ -2,7 +2,6 @@ D:\Epam\northwind-ap\module05\WebApp\Northwind.Services.EntityFramework\bin\Debu
 D:\Epam\northwind-ap\module05\WebApp\Northwind.Services.EntityFramework\bin\Debug\net5.0\Northwind.Services.EntityFramework.runtimeconfig.json
 D:\Epam\northwind-ap\module05\WebApp\Northwind.Services.EntityFramework\bin\Debug\net5.0\Northwind.Services.EntityFramework.runtimeconfig.dev.json
 D:\Epam\northwind-ap\module05\WebApp\Northwind.Services.EntityFramework\bin\Debug\net5.0\Northwind.Services.EntityFramework.dll
-D:\Epam\northwind-ap\module05\WebApp\Northwind.Services.EntityFramework\bin\Debug\net5.0\ref\Northwind.Services.EntityFramework.dll
 D:\Epam\northwind-ap\module05\WebApp\Northwind.Services.EntityFramework\bin\Debug\net5.0\Northwind.Services.EntityFramework.pdb
 D:\Epam\northwind-ap\module05\WebApp\Northwind.Services.EntityFramework\bin\Debug\net5.0\Northwind.DataAccess.dll
 D:\Epam\northwind-ap\module05\WebApp\Northwind.Services.EntityFramework\bin\Debug\net5.0\Northwind.DataAccess.SqlServer.dll
@@ -24,3 +23,4 @@ D:\Epam\northwind-ap\module05\WebApp\Northwind.Services.EntityFramework\obj\Debu
 D:\Epam\northwind-ap\module05\WebApp\Northwind.Services.EntityFramework\obj\Debug\net5.0\ref\Northwind.Services.EntityFramework.dll
 D:\Epam\northwind-ap\module05\WebApp\Northwind.Services.EntityFramework\obj\Debug\net5.0\Northwind.Services.EntityFramework.pdb
 D:\Epam\northwind-ap\module05\WebApp\Northwind.Services.EntityFramework\obj\Debug\net5.0\Northwind.Services.EntityFramework.genruntimeconfig.cache
+D:\Epam\northwind-ap\module05\WebApp\Northwind.Services.EntityFramework\obj\Debug\net5.0\refint\Northwind.Services.EntityFramework.dll

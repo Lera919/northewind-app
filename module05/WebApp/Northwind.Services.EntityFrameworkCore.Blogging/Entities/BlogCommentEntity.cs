@@ -14,10 +14,13 @@ namespace Northwind.Services.EntityFrameworkCore.Blogging.Entities
         [Column("Comment_id")]
         public int CommentId { get; set; }
 
+
         [Column("Customer_id")]
         public string CustomerId { get; set; }
 
         [Column("Comment_text")]
         public string Text { get; set; }
+
+        public BlogArticleEntity Article { get; set; }
     }
 }

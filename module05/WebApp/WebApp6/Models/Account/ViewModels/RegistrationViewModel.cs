@@ -21,11 +21,12 @@ namespace WebApp6.Models
         [Compare("Password", ErrorMessage = "Incorrect password")]
         public string ConfirmPassword { get; set; }
 
-
         // This property will hold a state, selected by user
         [Required]
         [Display(Name = "SelectedRoleId")]
         public string Role { get; set; }
+
+
 
         // This property will hold all available states for selection
         public IEnumerable<SelectListItem> Roles { get; set; }
